@@ -1,0 +1,159 @@
+You might "Are Gonna Need It" - Avoiding the MonoRail
+!TITLE
+You might "Are Gonna Need It"
+Avoiding the MonoRail
+@davetron5000
+
+!SECTION
+Me
+
+!SECTION
+@davetron5000
+
+!BULLETS
+Lead Engineer @ Stitch Fix
+* One horrible Django App
+* Special-purpose Rails Apps
+* Gems & Services
+
+!BULLETS
+Former Engineer @ LivingSocial
+* One giant monorail
+* Array of payment-related services
+* All Rails
+
+!IMAGE
+images/book.png
+
+!SECTION
+What's a MonoRail?
+
+!IMAGE
+images/monorail.jpg
+
+!BULLETS
+A MonoRail
+* Rails app
+* Monolithic
+* Too big, too hard to change over time
+
+!IMAGE
+images/monorail_busted.png
+
+!BULLETS
+Reality Check
+* Not building a blog
+* Not building web-based `rails c`
+* You will (eventually) stray from the Golden Path
+
+!IMAGE
+images/god_emperor.jpg
+
+!BULLETS
+The Golden Path
+* All logic in models
+* One database
+* Rails Mailers
+* In-request processing
+
+!SECTION
+Hexagonal Rails
+
+!IMAGE
+images/graph.png
+
+!SECTION
+When the time comes, how can we be prepared?
+
+!SECTION
+Oh yes, that time will come.
+
+!SECTION
+Two Words: Admin Interface
+
+!SECTION
+Single Repsonsibility Principle
+
+!CODE
+class Person < ActiveRecord::Base
+  # name, birthdate, password in DB
+
+  def age
+    Date.now - self.birthdate
+  end
+end
+
+!SECTION
+Not bad (use obama)
+
+!CODE
+class Person < ActiveRecord::Base
+
+  # name, birthdate, password in DB
+  def age
+    Date.now - @birthdate
+  end
+
+  def signup(password)
+    password = encrypt(password)
+    save
+    UserMailer.welcome_email(self).deliver
+  end
+end
+
+!SECTION
+Hmmmm
+
+!CODE
+class Person < ActiveRecord::Base
+
+  # name, birthdate, password in DB
+  def age
+    Date.now - @birthdate
+  end
+
+  def signup(password)
+    password = encrypt(password)
+    save
+    UserMailer.welcome_email(self).deliver
+  end
+
+  def purchase(item)
+    # ...
+  end
+
+  def credit_cards(item)
+    # ...
+  end
+
+  def referrals
+    # ...
+  end
+
+  def refer_user(user)
+    # ...
+  end
+
+  def is_admin?
+    # ...
+  end
+
+  def is_super_admin?
+    # ...
+  end
+
+  def request_refund
+    # ...
+  end
+
+  def paypal_credentials
+    # ...
+  end
+
+  def start_some_business_process
+    # ...
+  end
+end
+
+!SECTIOn
+AUGH!

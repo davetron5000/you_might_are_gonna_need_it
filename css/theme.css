@@ -1,0 +1,227 @@
+pre ::-moz-selection {
+  background: #ff5e99;
+  color: #ff5e99;
+  text-shadow: none; }
+
+pre ::selection {
+  background: #ff5e99;
+  color: #ff5e99;
+  text-shadow: none; }
+
+pre code {
+  display: block;
+  padding: 0.5em;
+  background: #474949;
+  color: #d1d9e1; }
+
+pre .body,
+pre .collection {
+  color: #d1d9e1; }
+
+pre .comment {
+  color: #969896;
+  font-style: italic; }
+
+pre .template_comment {
+  color: #969896;
+  font-style: italic; }
+
+pre .diff .header {
+  color: #969896;
+  font-style: italic; }
+
+pre .doctype {
+  color: #969896;
+  font-style: italic; }
+
+pre .lisp .string {
+  color: #969896;
+  font-style: italic; }
+
+pre .javadoc {
+  color: #969896;
+  font-style: italic; }
+
+pre .keyword {
+  color: #cc99cc; }
+
+pre .clojure .attribute {
+  color: #cc99cc; }
+
+pre .winutils {
+  color: #cc99cc; }
+
+pre .javascript .title {
+  color: #cc99cc; }
+
+pre .addition {
+  color: #cc99cc; }
+
+pre .css .tag {
+  color: #cc99cc; }
+
+pre .number {
+  color: #f99157; }
+
+pre .command {
+  color: #8abeb7; }
+
+pre .string {
+  color: #8abeb7; }
+
+pre .tag .value {
+  color: #8abeb7; }
+
+pre .phpdoc {
+  color: #8abeb7; }
+
+pre .tex .formula {
+  color: #eee8d5; }
+
+pre .regexp {
+  color: #8abeb7; }
+
+pre .hexcolor {
+  color: #8abeb7; }
+
+pre .title {
+  color: #b5bd68; }
+
+pre .localvars {
+  color: #b5bd68; }
+
+pre .function .title {
+  color: #b5bd68; }
+
+pre .chunk {
+  color: #b5bd68; }
+
+pre .decorator {
+  color: #b5bd68; }
+
+pre .built_in {
+  color: #b5bd68; }
+
+pre .lisp .title {
+  color: #ffcc66; }
+
+pre .identifier {
+  color: #b5bd68; }
+
+pre .class .keyword {
+  color: #f2777a; }
+
+pre .variable {
+  color: #ffcc66; }
+
+pre .lisp .body {
+  color: #ffcc66; }
+
+pre .smalltalk .number {
+  color: #ffcc66; }
+
+pre .constant {
+  color: #ffcc66; }
+
+pre .class .title {
+  color: #ffcc66; }
+
+pre .parent {
+  color: #ffcc66; }
+
+pre .haskell .label {
+  color: #ffcc66; }
+
+pre .id {
+  color: #ffcc66; }
+
+pre .lisp .title {
+  color: #ffcc66; }
+
+pre .clojure .title .built_in {
+  color: #ffcc66; }
+
+pre .tag .title,
+pre .rules .property,
+pre .django .tag .keyword,
+pre .clojure .title .built_in {
+  font-weight: bold; }
+
+pre .attribute {
+  color: #81a2be; }
+
+pre .clojure .title {
+  color: #81a2be; }
+
+pre .preprocessor {
+  color: #f99157; }
+
+pre .pi {
+  color: #f99157; }
+
+pre .shebang {
+  color: #f99157; }
+
+pre .symbol {
+  color: #f99157; }
+
+pre .symbol .string {
+  color: #f99157; }
+
+pre .diff .change {
+  color: #f99157; }
+
+pre .special {
+  color: #f99157; }
+
+pre .attr_selector {
+  color: #f99157; }
+
+pre .important {
+  color: #f99157; }
+
+pre .subst {
+  color: #f99157; }
+
+pre .cdata {
+  color: #f99157; }
+
+pre .deletion {
+  color: #dc322f; }
+
+pre .tex .formula {
+  background: #eee8d5; }
+
+pre {
+  counter-reset: lines; }
+
+pre .line {
+  counter-increment: lines; }
+
+pre .line::before {
+  content: counter(lines);
+  text-align: right;
+  display: inline-block;
+  width: 2em;
+  padding-right: 0.5em;
+  margin-right: 0.5em;
+  color: #eee8d5; }
+
+pre .line-callout::before {
+  content: '\2192';
+  text-align: right;
+  display: inline-block;
+  width: 2em;
+  padding-right: 0.5em;
+  margin-right: 0.5em;
+  color: #002b36; }
+
+.lines-callout {
+  border-radius: 0.25em;
+  padding-top: 0.15em;
+  padding-bottom: 0.15em; }
+
+.lines-callout {
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+  background: #eee8d5; }

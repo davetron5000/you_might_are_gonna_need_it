@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>You might "Are Gonna Need It" - Avoiding the MonoRail</title>
+    <script src="js/lib/jquery-1.8.0.min.js"></script>
+    <script src="js/lib/highlight-7.1.min.js"></script>
+    <script src="js/lib/jquerytypewriter.js"></script>
+    <script src="js/lib/underscore-1.3.3.min.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/sizer.js"></script>
+    <script src="js/bullets.js"></script>
+    <script src="js/trickster.js"></script>
+    <script src="js/custom.js"></script>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+      $(window).load(function() {
+        Trickster = TricksterLoader(TricksterDefaultConfig,{});
+        Trickster.load();
+      });
+    </script>
+  </head>
+  <body><div id="contents">
+    <section class='TITLE'>
+<h1>You might "Are Gonna Need It"</h1>
+<h2>Avoiding the MonoRail</h2>
+<h3>@davetron5000</h3>
+</section>
+<section class='SECTION'>
+<h1>Me</h1>
+</section>
+<section class='SECTION'>
+<h1>@davetron5000</h1>
+</section>
+<section class='BULLETS'>
+<h1>Lead Engineer @ Stitch Fix</h1>
+<ul>
+<li>One horrible Django App</li>
+<li>Special-purpose Rails Apps</li>
+<li>Gems & Services</li>
+</ul>
+</section>
+<section class='BULLETS'>
+<h1>Former Engineer @ LivingSocial</h1>
+<ul>
+<li>One giant monorail</li>
+<li>Array of payment-related services</li>
+<li>All Rails</li>
+</ul>
+</section>
+<section class='IMAGE'>
+<img src='images/book.png'>
+</section>
+<section class='SECTION'>
+<h1>What's a MonoRail?</h1>
+</section>
+<section class='IMAGE'>
+<img src='images/monorail.jpg'>
+</section>
+<section class='BULLETS'>
+<h1>A MonoRail</h1>
+<ul>
+<li>Rails app</li>
+<li>Monolithic</li>
+<li>Too big, too hard to change over time</li>
+</ul>
+</section>
+<section class='IMAGE'>
+<img src='images/monorail_busted.png'>
+</section>
+<section class='BULLETS'>
+<h1>Reality Check</h1>
+<ul>
+<li>Not building a blog</li>
+<li>Not building web-based `rails c`</li>
+<li>You will (eventually) stray from the Golden Path</li>
+</ul>
+</section>
+<section class='IMAGE'>
+<img src='images/god_emperor.jpg'>
+</section>
+<section class='BULLETS'>
+<h1>The Golden Path</h1>
+<ul>
+<li>All logic in models</li>
+<li>One database</li>
+<li>Rails Mailers</li>
+<li>In-request processing</li>
+</ul>
+</section>
+<section class='SECTION'>
+<h1>Hexagonal Rails</h1>
+</section>
+<section class='IMAGE'>
+<img src='images/graph.png'>
+</section>
+<section class='SECTION'>
+<h1>When the time comes, how can we be prepared?</h1>
+</section>
+<section class='SECTION'>
+<h1>Oh yes, that time will come.</h1>
+</section>
+<section class='SECTION'>
+<h1>Two Words: Admin Interface</h1>
+</section>
+<section class='SECTION'>
+<h1>Single Repsonsibility Principle</h1>
+</section>
+<section class='CODE'>
+<pre><code data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class Person < ActiveRecord::Base</span>
+<span class='line line-2 ' >  # name, birthdate, password in DB</span>
+<span class='line line-3 ' ></span>
+<span class='line line-4 ' >  def age</span>
+<span class='line line-5 ' >    Date.now - self.birthdate</span>
+<span class='line line-6 ' >  end</span>
+<span class='line line-7 ' >end</span></code></pre>
+</section>
+<section class='SECTION'>
+<h1>Not bad (use obama)</h1>
+</section>
+<section class='CODE'>
+<pre><code data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class Person < ActiveRecord::Base</span>
+<span class='line line-2 ' ></span>
+<span class='line line-3 ' >  # name, birthdate, password in DB</span>
+<span class='line line-4 ' >  def age</span>
+<span class='line line-5 ' >    Date.now - @birthdate</span>
+<span class='line line-6 ' >  end</span>
+<span class='line line-7 ' ></span>
+<span class='line line-8 ' >  def signup(password)</span>
+<span class='line line-9 ' >    password = encrypt(password)</span>
+<span class='line line-10 ' >    save</span>
+<span class='line line-11 ' >    UserMailer.welcome_email(self).deliver</span>
+<span class='line line-12 ' >  end</span>
+<span class='line line-13 ' >end</span></code></pre>
+</section>
+<section class='SECTION'>
+<h1>Hmmmm</h1>
+</section>
+<section class='CODE'>
+<pre><code data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class Person < ActiveRecord::Base</span>
+<span class='line line-2 ' ></span>
+<span class='line line-3 ' >  # name, birthdate, password in DB</span>
+<span class='line line-4 ' >  def age</span>
+<span class='line line-5 ' >    Date.now - @birthdate</span>
+<span class='line line-6 ' >  end</span>
+<span class='line line-7 ' ></span>
+<span class='line line-8 ' >  def signup(password)</span>
+<span class='line line-9 ' >    password = encrypt(password)</span>
+<span class='line line-10 ' >    save</span>
+<span class='line line-11 ' >    UserMailer.welcome_email(self).deliver</span>
+<span class='line line-12 ' >  end</span>
+<span class='line line-13 ' ></span>
+<span class='line line-14 ' >  def purchase(item)</span>
+<span class='line line-15 ' >    # ...</span>
+<span class='line line-16 ' >  end</span>
+<span class='line line-17 ' ></span>
+<span class='line line-18 ' >  def credit_cards(item)</span>
+<span class='line line-19 ' >    # ...</span>
+<span class='line line-20 ' >  end</span>
+<span class='line line-21 ' ></span>
+<span class='line line-22 ' >  def referrals</span>
+<span class='line line-23 ' >    # ...</span>
+<span class='line line-24 ' >  end</span>
+<span class='line line-25 ' ></span>
+<span class='line line-26 ' >  def refer_user(user)</span>
+<span class='line line-27 ' >    # ...</span>
+<span class='line line-28 ' >  end</span>
+<span class='line line-29 ' ></span>
+<span class='line line-30 ' >  def is_admin?</span>
+<span class='line line-31 ' >    # ...</span>
+<span class='line line-32 ' >  end</span>
+<span class='line line-33 ' ></span>
+<span class='line line-34 ' >  def is_super_admin?</span>
+<span class='line line-35 ' >    # ...</span>
+<span class='line line-36 ' >  end</span>
+<span class='line line-37 ' ></span>
+<span class='line line-38 ' >  def request_refund</span>
+<span class='line line-39 ' >    # ...</span>
+<span class='line line-40 ' >  end</span>
+<span class='line line-41 ' ></span>
+<span class='line line-42 ' >  def paypal_credentials</span>
+<span class='line line-43 ' >    # ...</span>
+<span class='line line-44 ' >  end</span>
+<span class='line line-45 ' ></span>
+<span class='line line-46 ' >  def start_some_business_process</span>
+<span class='line line-47 ' >    # ...</span>
+<span class='line line-48 ' >  end</span>
+<span class='line line-49 ' >end</span></code></pre>
+</section>
+<section class='SECTIOn'>
+<h1>AUGH!</h1>
+</section>
+
+  </div></body>
+</html>
