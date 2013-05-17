@@ -1,9 +1,16 @@
-$bg-color           : #474949;
-$default-fg-color   : #D1D9E1;
-$selection-bg-color : #FF5E99;
-$selection-fg-color : #FF5E99;
+$green:#9ed7d1;
+$yellow:#f2e230;
+$dark-grey:#464547;
+$medium-grey:#bebfc1;
+$light-grey:#efefef;
+$red:#bf3030;
 
-$comment-color          : #969896;
+$bg-color           : darken($dark-grey,10);
+$default-fg-color   : #ddd;
+$selection-bg-color : #333;
+$selection-fg-color : #fff;
+
+$comment-color          : $light-grey;
 $comment-style          : italic;
 $template_comment-color : $comment-color;
 $template_comment-style : $comment-style;
@@ -16,16 +23,16 @@ $diff-header-style      : $comment-style;
 $lisp-string-color      : $comment-color;
 $lisp-string-style      : $comment-style;
 
-$keyword-color           : #cc99cc;
+$keyword-color           : $green;
 $css-tag-color           : $keyword-color;
 $addition-color          : $keyword-color;
 $javascript-title-color  : $keyword-color;
 $winutils-color          : $keyword-color;
 $clojure-attribute-color : $keyword-color;
 
-$number-color: #f99157;
+$number-color: $yellow;
 
-$regexp-color      : #8abeb7;
+$regexp-color      : $red;
 $tex-formula-color : $regexp-color;
 $phpdoc-color      : $regexp-color;
 $tag-value-color   : $regexp-color;
@@ -33,7 +40,7 @@ $string-color      : $regexp-color;
 $command-color     : $regexp-color;
 $hexcolor-color    : $regexp-color;
 
-$identifier-color     : #b5bd68;
+$identifier-color     : $red;
 $title-color          : $identifier-color;
 $lisp-title-color     : $identifier-color;
 $built_in-color       : $identifier-color;
@@ -42,9 +49,9 @@ $chunk-color          : $identifier-color;
 $function-title-color : $identifier-color;
 $localvars-color      : $identifier-color;
 
-$class-keyword-color : #f2777a;
+$class-keyword-color : $yellow;
 
-$variable-color               : #ffcc66;
+$variable-color               : $yellow;
 $lisp-body-color              : $variable-color;
 $smalltalk-number-color       : $variable-color;
 $constant-color               : $variable-color;
@@ -55,10 +62,10 @@ $id-color                     : $variable-color;
 $lisp-title-color             : $variable-color;
 $clojure-title-built_in-color : $variable-color;
 
-$attribute-color     : #81a2be;
+$attribute-color     : $light-grey;
 $clojure-title-color : $attribute-color;
 
-$symbol-color        : #f99157;
+$symbol-color        : $green;
 $cdata-color         : $symbol-color;
 $subst-color         : $symbol-color;
 $important-color     : $symbol-color;
@@ -74,8 +81,8 @@ $deletion-color : #dc322f;
 
 $tex-formula-color: #eee8d5;
 
-$callout-bg-color: #eee8d5;
-$callout-arrow-color: #002b36;
+$callout-bg-color: $dark-grey;
+$callout-arrow-color: $yellow;
 
 pre ::-moz-selection {
   background: $selection-bg-color;

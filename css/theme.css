@@ -1,145 +1,145 @@
 pre ::-moz-selection {
-  background: #ff5e99;
-  color: #ff5e99;
+  background: #333333;
+  color: white;
   text-shadow: none; }
 
 pre ::selection {
-  background: #ff5e99;
-  color: #ff5e99;
+  background: #333333;
+  color: white;
   text-shadow: none; }
 
 pre code {
   display: block;
   padding: 0.5em;
-  background: #474949;
-  color: #d1d9e1; }
+  background: #2d2c2d;
+  color: #dddddd; }
 
 pre .body,
 pre .collection {
-  color: #d1d9e1; }
+  color: #dddddd; }
 
 pre .comment {
-  color: #969896;
+  color: #efefef;
   font-style: italic; }
 
 pre .template_comment {
-  color: #969896;
+  color: #efefef;
   font-style: italic; }
 
 pre .diff .header {
-  color: #969896;
+  color: #efefef;
   font-style: italic; }
 
 pre .doctype {
-  color: #969896;
+  color: #efefef;
   font-style: italic; }
 
 pre .lisp .string {
-  color: #969896;
+  color: #efefef;
   font-style: italic; }
 
 pre .javadoc {
-  color: #969896;
+  color: #efefef;
   font-style: italic; }
 
 pre .keyword {
-  color: #cc99cc; }
+  color: #9ed7d1; }
 
 pre .clojure .attribute {
-  color: #cc99cc; }
+  color: #9ed7d1; }
 
 pre .winutils {
-  color: #cc99cc; }
+  color: #9ed7d1; }
 
 pre .javascript .title {
-  color: #cc99cc; }
+  color: #9ed7d1; }
 
 pre .addition {
-  color: #cc99cc; }
+  color: #9ed7d1; }
 
 pre .css .tag {
-  color: #cc99cc; }
+  color: #9ed7d1; }
 
 pre .number {
-  color: #f99157; }
+  color: #f2e230; }
 
 pre .command {
-  color: #8abeb7; }
+  color: #bf3030; }
 
 pre .string {
-  color: #8abeb7; }
+  color: #bf3030; }
 
 pre .tag .value {
-  color: #8abeb7; }
+  color: #bf3030; }
 
 pre .phpdoc {
-  color: #8abeb7; }
+  color: #bf3030; }
 
 pre .tex .formula {
   color: #eee8d5; }
 
 pre .regexp {
-  color: #8abeb7; }
+  color: #bf3030; }
 
 pre .hexcolor {
-  color: #8abeb7; }
+  color: #bf3030; }
 
 pre .title {
-  color: #b5bd68; }
+  color: #bf3030; }
 
 pre .localvars {
-  color: #b5bd68; }
+  color: #bf3030; }
 
 pre .function .title {
-  color: #b5bd68; }
+  color: #bf3030; }
 
 pre .chunk {
-  color: #b5bd68; }
+  color: #bf3030; }
 
 pre .decorator {
-  color: #b5bd68; }
+  color: #bf3030; }
 
 pre .built_in {
-  color: #b5bd68; }
+  color: #bf3030; }
 
 pre .lisp .title {
-  color: #ffcc66; }
+  color: #f2e230; }
 
 pre .identifier {
-  color: #b5bd68; }
+  color: #bf3030; }
 
 pre .class .keyword {
-  color: #f2777a; }
+  color: #f2e230; }
 
 pre .variable {
-  color: #ffcc66; }
+  color: #f2e230; }
 
 pre .lisp .body {
-  color: #ffcc66; }
+  color: #f2e230; }
 
 pre .smalltalk .number {
-  color: #ffcc66; }
+  color: #f2e230; }
 
 pre .constant {
-  color: #ffcc66; }
+  color: #f2e230; }
 
 pre .class .title {
-  color: #ffcc66; }
+  color: #f2e230; }
 
 pre .parent {
-  color: #ffcc66; }
+  color: #f2e230; }
 
 pre .haskell .label {
-  color: #ffcc66; }
+  color: #f2e230; }
 
 pre .id {
-  color: #ffcc66; }
+  color: #f2e230; }
 
 pre .lisp .title {
-  color: #ffcc66; }
+  color: #f2e230; }
 
 pre .clojure .title .built_in {
-  color: #ffcc66; }
+  color: #f2e230; }
 
 pre .tag .title,
 pre .rules .property,
@@ -148,43 +148,43 @@ pre .clojure .title .built_in {
   font-weight: bold; }
 
 pre .attribute {
-  color: #81a2be; }
+  color: #efefef; }
 
 pre .clojure .title {
-  color: #81a2be; }
+  color: #efefef; }
 
 pre .preprocessor {
-  color: #f99157; }
+  color: #9ed7d1; }
 
 pre .pi {
-  color: #f99157; }
+  color: #9ed7d1; }
 
 pre .shebang {
-  color: #f99157; }
+  color: #9ed7d1; }
 
 pre .symbol {
-  color: #f99157; }
+  color: #9ed7d1; }
 
 pre .symbol .string {
-  color: #f99157; }
+  color: #9ed7d1; }
 
 pre .diff .change {
-  color: #f99157; }
+  color: #9ed7d1; }
 
 pre .special {
-  color: #f99157; }
+  color: #9ed7d1; }
 
 pre .attr_selector {
-  color: #f99157; }
+  color: #9ed7d1; }
 
 pre .important {
-  color: #f99157; }
+  color: #9ed7d1; }
 
 pre .subst {
-  color: #f99157; }
+  color: #9ed7d1; }
 
 pre .cdata {
-  color: #f99157; }
+  color: #9ed7d1; }
 
 pre .deletion {
   color: #dc322f; }
@@ -205,7 +205,7 @@ pre .line::before {
   width: 2em;
   padding-right: 0.5em;
   margin-right: 0.5em;
-  color: #eee8d5; }
+  color: #464547; }
 
 pre .line-callout::before {
   content: '\2192';
@@ -214,7 +214,7 @@ pre .line-callout::before {
   width: 2em;
   padding-right: 0.5em;
   margin-right: 0.5em;
-  color: #002b36; }
+  color: #f2e230; }
 
 .lines-callout {
   border-radius: 0.25em;
@@ -224,4 +224,4 @@ pre .line-callout::before {
 .lines-callout {
   padding-top: 0.1em;
   padding-bottom: 0.1em;
-  background: #eee8d5; }
+  background: #464547; }

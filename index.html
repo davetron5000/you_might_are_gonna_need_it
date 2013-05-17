@@ -96,19 +96,23 @@
 <img src='images/graph.png'>
 </section>
 <section class='SECTION'>
-<h1>When the time comes, how can we be prepared?</h1>
+<h1>When the time comes</h1>
+<h2>how can we be prepared?</h2>
 </section>
 <section class='SECTION'>
 <h1>Oh yes, that time will come.</h1>
 </section>
 <section class='SECTION'>
-<h1>Two Words: Admin Interface</h1>
+<h1>Two Words</h1>
+<h2>Admin Interface</h2>
 </section>
 <section class='SECTION'>
-<h1>Single Repsonsibility Principle</h1>
+<h1>Single </h1>
+<h2>Repsonsibility </h2>
+<h3>Principle</h3>
 </section>
 <section class='CODE'>
-<pre><code data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class Person < ActiveRecord::Base</span>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class Person < ActiveRecord::Base</span>
 <span class='line line-2 ' >  # name, birthdate, password in DB</span>
 <span class='line line-3 ' ></span>
 <span class='line line-4 ' >  def age</span>
@@ -120,7 +124,7 @@
 <h1>Not bad (use obama)</h1>
 </section>
 <section class='CODE'>
-<pre><code data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class Person < ActiveRecord::Base</span>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class Person < ActiveRecord::Base</span>
 <span class='line line-2 ' ></span>
 <span class='line line-3 ' >  # name, birthdate, password in DB</span>
 <span class='line line-4 ' >  def age</span>
@@ -138,7 +142,7 @@
 <h1>Hmmmm</h1>
 </section>
 <section class='CODE'>
-<pre><code data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class Person < ActiveRecord::Base</span>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class Person < ActiveRecord::Base</span>
 <span class='line line-2 ' ></span>
 <span class='line line-3 ' >  # name, birthdate, password in DB</span>
 <span class='line line-4 ' >  def age</span>
@@ -188,8 +192,479 @@
 <span class='line line-48 ' >  end</span>
 <span class='line line-49 ' >end</span></code></pre>
 </section>
-<section class='SECTIOn'>
+<section class='SECTION'>
 <h1>AUGH!</h1>
+</section>
+<section class='SECTION'>
+<h1>We don't want this in our models!</h1>
+</section>
+<section class='SECTION'>
+<h1>Why do we allow this in our apps?</h1>
+</section>
+<section class='SECTION'>
+<h1>But, but</h1>
+<h2>YAGNI!</h2>
+</section>
+<section class='QUOTE'>
+<h1><a href="http://c2.com/cgi/wiki?YouArentGonnaNeedIt">YAGNI</a></h1>
+<h2><blockquote>Always implement things when you actually need them, never when you just foresee that you need them.</blockquote></h2>
+</section>
+<section class='SECTION'>
+<h1>Don't waste time</h1>
+<h2>building things you don't know you'll need</h2>
+</section>
+<section class='SECTION'>
+<h1>Code <strong>will</strong> change</h1>
+</section>
+<section class='SECTION'>
+<h1>Can we make those changes easier</h1>
+<h2>without wasting time/effort now?</h2>
+</section>
+<section class='SECTION'>
+<h1>Yes we can (use obama-style image)</h1>
+</section>
+<section class='BULLETS'>
+<h1>Changes we want to be easy</h1>
+<ul>
+<li>Data from NOT the database</li>
+<li>NOT your Rails app accessing the database</li>
+<li>Move things to the background</li>
+<li>Shared business logic</li>
+</ul>
+</section>
+<section class='SECTION'>
+<h1>Data from NOT the database</h1>
+</section>
+<section class='CODE'>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >def show</span>
+<span class='line line-2 ' >  @purchases = Person.find(params[:id]).</span>
+<span class='line line-3 ' >    purchases.</span>
+<span class='line line-4 ' >    successful.</span>
+<span class='line line-5 ' >    shipped.</span>
+<span class='line line-6 ' >    received_since(4.days.ago)</span>
+<span class='line line-7 ' >  end</span>
+<span class='line line-8 ' >end</span></code></pre>
+</section>
+<section class='SECTION'>
+<h1>NOT your Rails app accessing the database</h1>
+</section>
+<section class='CODE'>
+<pre><code class='bash' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >#!/bin/bash</span>
+<span class='line line-2 ' >echo "update people set whatever=true" | \</span>
+<span class='line line-3 ' >       psql ENV["DATABASE_URL"]</span>
+<span class='line line-4 ' >echo "select * from purchases where date > now() - interval(1,day)" | \</span>
+<span class='line line-5 ' >       psql ENV["DATABASE_URL"] | \</span>
+<span class='line line-6 ' >       csv_then_mail_ceo.pl</span></code></pre>
+</section>
+<section class='SECTION'>
+<h1>Move things to the background</h1>
+</section>
+<section class='CODE'>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >def create</span>
+<span class='line line-2 ' >  person = Person.find(params[:id])</span>
+<span class='line line-3 ' >  @purchase = Purchase.create(params)</span>
+<span class='line line-4 ' >  if purchase.valid?</span>
+<span class='line line-5 ' >    credit_card = person.credit_card(params[:credit_card_id])</span>
+<span class='line line-6 ' >    result = ThirdPartyCreditCardCharger.charge(</span>
+<span class='line line-7 ' >        purchase.price,</span>
+<span class='line line-8 ' >        credit_card)</span>
+<span class='line line-9 ' >    unless result.success?</span>
+<span class='line line-10 ' >      flash[:error] = result.error</span>
+<span class='line line-11 ' >      render "edit"</span>
+<span class='line line-12 ' >    end</span>
+<span class='line line-13 ' >  else</span>
+<span class='line line-14 ' >    render "edit"</span>
+<span class='line line-15 ' >  end</span>
+<span class='line line-16 ' >end</span></code></pre>
+</section>
+<section class='CODE'>
+<pre><code data-strikeouts='' data-callout-lines='6,7,8'><span class='line line-1 ' >def create</span>
+<span class='line line-2 ' >  person = Person.find(params[:id])</span>
+<span class='line line-3 ' >  @purchase = Purchase.create(params)</span>
+<span class='line line-4 ' >  if purchase.valid?</span>
+<span class='line line-5 ' >    credit_card = person.credit_card(params[:credit_card_id])</span>
+<div class='lines-callout'><span class='line line-6 line-callout' >    result = ThirdPartyCreditCardCharger.charge(</span>
+<span class='line line-7 line-callout' >        purchase.price,</span>
+<span class='line line-8 line-callout' >        credit_card)</span>
+</div><span class='line line-9 ' >    unless result.success?</span>
+<span class='line line-10 ' >      flash[:error] = result.error</span>
+<span class='line line-11 ' >      render "edit"</span>
+<span class='line line-12 ' >    end</span>
+<span class='line line-13 ' >  else</span>
+<span class='line line-14 ' >    render "edit"</span>
+<span class='line line-15 ' >  end</span>
+<span class='line line-16 ' >end</span></code></pre>
+</section>
+<section class='SECTION'>
+<h1>Shared business logic</h1>
+</section>
+<section class='CODE'>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' ># www.your-company.com</span>
+<span class='line line-2 ' >def create</span>
+<span class='line line-3 ' >  customer = current_user</span>
+<span class='line line-4 ' >  purchase = Purchase.new(params, customer: customer)</span>
+<span class='line line-5 ' >  if purchase.type == 'electronic'</span>
+<span class='line line-6 ' >    if purchase.assets_available? &&</span>
+<span class='line line-7 ' >       purchase.charge</span>
+<span class='line line-8 ' >       redirect_to purchase.asset_url</span>
+<span class='line line-9 ' >    else</span>
+<span class='line line-10 ' >      queue_purchase_for_later(puchase)</span>
+<span class='line line-11 ' >    end</span>
+<span class='line line-12 ' >  else</span>
+<span class='line line-13 ' >    purchase.charge!</span>
+<span class='line line-14 ' >  end</span>
+<span class='line line-15 ' >end</span>
+<span class='line line-16 ' ></span>
+<span class='line line-17 ' ># admin.your-company.com</span>
+<span class='line line-18 ' ># CSR purchases on behalf of customer</span>
+<span class='line line-19 ' >def create</span>
+<span class='line line-20 ' >  customer = Customer.find(params[:customer_id])</span>
+<span class='line line-21 ' >  purchase = Purchase.new(params, customer: customer)</span>
+<span class='line line-22 ' >  if purchase.type == 'electronic'</span>
+<span class='line line-23 ' >    if purchase.assets_available? &&</span>
+<span class='line line-24 ' >       purchase.charge</span>
+<span class='line line-25 ' >       @asset_url = purchase.asset_url</span>
+<span class='line line-26 ' >    else</span>
+<span class='line line-27 ' >      flash[:error] = "Asset not ready for customer download"</span>
+<span class='line line-28 ' >    end</span>
+<span class='line line-29 ' >  else</span>
+<span class='line line-30 ' >    purchase.charge!</span>
+<span class='line line-31 ' >  end</span>
+<span class='line line-32 ' >end</span></code></pre>
+</section>
+<section class='CODE'>
+<pre><code data-strikeouts='' data-callout-lines='5,6,7,13,22,23,24,30'><span class='line line-1 ' ># www.your-company.com</span>
+<span class='line line-2 ' >def create</span>
+<span class='line line-3 ' >  customer = current_user</span>
+<span class='line line-4 ' >  purchase = Purchase.new(params, customer: customer)</span>
+<div class='lines-callout'><span class='line line-5 line-callout' >  if purchase.type == 'electronic'</span>
+<span class='line line-6 line-callout' >    if purchase.assets_available? &&</span>
+<span class='line line-7 line-callout' >       purchase.charge</span>
+</div><span class='line line-8 ' >       redirect_to purchase.asset_url</span>
+<span class='line line-9 ' >    else</span>
+<span class='line line-10 ' >      queue_purchase_for_later(puchase)</span>
+<span class='line line-11 ' >    end</span>
+<span class='line line-12 ' >  else</span>
+<div class='lines-callout'><span class='line line-13 line-callout' >    purchase.charge!</span>
+</div><span class='line line-14 ' >  end</span>
+<span class='line line-15 ' >end</span>
+<span class='line line-16 ' ></span>
+<span class='line line-17 ' ># admin.your-company.com</span>
+<span class='line line-18 ' ># CSR purchases on behalf of customer</span>
+<span class='line line-19 ' >def create</span>
+<span class='line line-20 ' >  customer = Customer.find(params[:customer_id])</span>
+<span class='line line-21 ' >  purchase = Purchase.new(params, customer: customer)</span>
+<div class='lines-callout'><span class='line line-22 line-callout' >  if purchase.type == 'electronic'</span>
+<span class='line line-23 line-callout' >    if purchase.assets_available? &&</span>
+<span class='line line-24 line-callout' >       purchase.charge</span>
+</div><span class='line line-25 ' >       @asset_url = purchase.asset_url</span>
+<span class='line line-26 ' >    else</span>
+<span class='line line-27 ' >      flash[:error] = "Asset not ready for customer download"</span>
+<span class='line line-28 ' >    end</span>
+<span class='line line-29 ' >  else</span>
+<div class='lines-callout'><span class='line line-30 line-callout' >    purchase.charge!</span>
+</div><span class='line line-31 ' >  end</span>
+<span class='line line-32 ' >end</span></code></pre>
+</section>
+<section class='SECTION'>
+<h1>What if these are (or become) different apps?</h1>
+</section>
+<section class='BULLETS'>
+<h1>Why worry now?</h1>
+<ul>
+<li>Chance of you "not needing it" ~ 0</li>
+<li>When you do, it will be later than you "should" deal with it</li>
+</ul>
+</section>
+<section class='SECTION'>
+<h1>Step 1 - Deployment</h1>
+</section>
+<section class='SECTION'>
+<h1>"Let's just keep it in www because it's too much of a pain to make a new app"</h1>
+</section>
+<section class='IMAGE'>
+<img src='Picard facepalm'>
+</section>
+<section class='BULLETS'>
+<h1>Frictionless deployments</h1>
+<ul>
+<li>One step deploy</li>
+<li>New apps self-service (or VERY low friction)</li>
+<li>Learn you some scripting</li>
+<li>App generators</li>
+</ul>
+</section>
+<section class='BULLETS'>
+<h1>App Generators</h1>
+<ul>
+<li>Use existing app as a template</li>
+<li>exception notifications, performance monitoring, logging, authentication, etc.</li>
+</ul>
+</section>
+<section class='SECTION'>
+<h1>Step 2 - Light Indirection</h1>
+</section>
+<section class='SECTION'>
+<h1>Business Logic</h1>
+<h2>It's not to go in your models</h2>
+<h3>(nor your controllers)</h3>
+</section>
+<section class='BULLETS'>
+<h1>Where?!?!?!?!?</h1>
+<ul>
+<li>You don't need DCI</li>
+<li>You don't need a DSL</li>
+<li>You don't need a framework</li>
+</ul>
+</section>
+<section class='SECTION'>
+<h1>Make a class</h1>
+</section>
+<section class='CODE'>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >def create</span>
+<span class='line line-2 ' >  customer = current_user</span>
+<span class='line line-3 ' >  purchase = Purchase.new(params, customer: customer)</span>
+<span class='line line-4 ' >  if purchase.type == 'electronic'</span>
+<span class='line line-5 ' >    if purchase.assets_available? &&</span>
+<span class='line line-6 ' >       purchase.charge</span>
+<span class='line line-7 ' >       redirect_to purchase.asset_url</span>
+<span class='line line-8 ' >    else</span>
+<span class='line line-9 ' >      queue_purchase_for_later(puchase)</span>
+<span class='line line-10 ' >    end</span>
+<span class='line line-11 ' >  else</span>
+<span class='line line-12 ' >    purchase.charge!</span>
+<span class='line line-13 ' >  end</span>
+<span class='line line-14 ' >end</span></code></pre>
+</section>
+<section class='CODE'>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines='3,4,5,6,8,10,11'><span class='line line-1 ' >def create</span>
+<span class='line line-2 ' >  customer = current_user</span>
+<div class='lines-callout'><span class='line line-3 line-callout' >  purchase = Purchase.new(params, customer: customer)</span>
+<span class='line line-4 line-callout' >  if purchase.type == 'electronic'</span>
+<span class='line line-5 line-callout' >    if purchase.assets_available? &&</span>
+<span class='line line-6 line-callout' >       purchase.charge</span>
+</div><span class='line line-7 ' >       redirect_to purchase.asset_url</span>
+<div class='lines-callout'><span class='line line-8 line-callout' >    else</span>
+</div><span class='line line-9 ' >      queue_purchase_for_later(puchase)</span>
+<div class='lines-callout'><span class='line line-10 line-callout' >    end</span>
+<span class='line line-11 line-callout' >  else</span>
+</div><span class='line line-12 ' >    purchase.charge!</span>
+<span class='line line-13 ' >  end</span>
+<span class='line line-14 ' >end</span></code></pre>
+</section>
+<section class='CODE'>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >def create</span>
+<span class='line line-2 ' >  customer = current_user</span>
+<span class='line line-3 ' >  result = PurchaseService.purchase!(customer,params)</span>
+<span class='line line-4 ' >  unless result.success?</span>
+<span class='line line-5 ' >    @purchase = result.purchase</span>
+<span class='line line-6 ' >    render "edit"</span>
+<span class='line line-7 ' >  end</span>
+<span class='line line-8 ' >end</span></code></pre>
+</section>
+<section class='CODE'>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class PurchaseService # this name sucks</span>
+<span class='line line-2 ' >  def self.purchase!(customer,params)</span>
+<span class='line line-3 ' >    purchase = Purchase.new(params, customer: customer)</span>
+<span class='line line-4 ' >    return Results.unsuccessful(purchase) unless purchase.valid?</span>
+<span class='line line-5 ' >    if purchase.type == 'electronic'</span>
+<span class='line line-6 ' >      if purchase.assets_available? &&</span>
+<span class='line line-7 ' >         purchase.charge</span>
+<span class='line line-8 ' >      else</span>
+<span class='line line-9 ' >        queue_purchase_for_later(puchase)</span>
+<span class='line line-10 ' >      end</span>
+<span class='line line-11 ' >    else</span>
+<span class='line line-12 ' >      purchase.charge!</span>
+<span class='line line-13 ' >    end</span>
+<span class='line line-14 ' >    Result.successful(purchase)</span>
+<span class='line line-15 ' >  end</span>
+<span class='line line-16 ' >end</span></code></pre>
+</section>
+<section class='BULLETS'>
+<h1>Why?</h1>
+<ul>
+<li>Same amount of code</li>
+<li>Cleaner, better factored</li>
+<li><tt>PurchaseService</tt>'s implementation can be replaced</li>
+</ul>
+</section>
+<section class='CODE'>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >def show</span>
+<span class='line line-2 ' >  @purchases = Person.find(params[:id]).</span>
+<span class='line line-3 ' >    purchases.</span>
+<span class='line line-4 ' >    successful.</span>
+<span class='line line-5 ' >    shipped.</span>
+<span class='line line-6 ' >    received_since(4.days.ago)</span>
+<span class='line line-7 ' >  end</span>
+<span class='line line-8 ' >end</span></code></pre>
+</section>
+<section class='CODE'>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >def show</span>
+<span class='line line-2 ' >  @purchases = PurchaseSearchService.recently_received(</span>
+<span class='line line-3 ' >      Person.find(params[:id]))</span>
+<span class='line line-4 ' >  end</span>
+<span class='line line-5 ' >end</span>
+<span class='line line-6 ' ></span>
+<span class='line line-7 ' >class PurchaseSearchService</span>
+<span class='line line-8 ' >  def self.recently_received(person)</span>
+<span class='line line-9 ' >    person.purchases.</span>
+<span class='line line-10 ' >      successful.</span>
+<span class='line line-11 ' >      shipped.</span>
+<span class='line line-12 ' >      received_since(4.days.ago)</span>
+<span class='line line-13 ' >  end</span>
+<span class='line line-14 ' >end</span></code></pre>
+</section>
+<section class='BULLETS'>
+<h1>Better</h1>
+<ul>
+<li>Controller is clearer</li>
+<li><tt>PurchaseSearchService</tt> interface can be replaced</li>
+<li>Same code</li>
+<li>Probably easier to test</li>
+</ul>
+</section>
+<section class='CODE'>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class PurchasePresenter</span>
+<span class='line line-2 ' >  def initialize(purchase)</span>
+<span class='line line-3 ' >    @purchase = purchase</span>
+<span class='line line-4 ' >    @customer = purchase.customer</span>
+<span class='line line-5 ' >  end</span>
+<span class='line line-6 ' ></span>
+<span class='line line-7 ' >  def customer_name</span>
+<span class='line line-8 ' >    @customer.name</span>
+<span class='line line-9 ' >  end</span>
+<span class='line line-10 ' ></span>
+<span class='line line-11 ' >  def purchase_price</span>
+<span class='line line-12 ' >    @purchase.price || 0</span>
+<span class='line line-13 ' >  end</span>
+<span class='line line-14 ' ></span>
+<span class='line line-15 ' >  # etc.</span>
+<span class='line line-16 ' >end</span></code></pre>
+</section>
+<section class='CODE'>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class PurchasePresenter</span>
+<span class='line line-2 ' >  attr_reader :customer_name,</span>
+<span class='line line-3 ' >              :purchase_price</span>
+<span class='line line-4 ' ></span>
+<span class='line line-5 ' >  def initialize(attribtues)</span>
+<span class='line line-6 ' >    @customer_name = attributes[:customer_name]</span>
+<span class='line line-7 ' >    @purchase_price = attributes[:purchase_price]</span>
+<span class='line line-8 ' >    # etc., or use some reflection</span>
+<span class='line line-9 ' >  end</span>
+<span class='line line-10 ' ></span>
+<span class='line line-11 ' >  def self.from_purchase(purchase)</span>
+<span class='line line-12 ' >    self.new(customer_name: purchase.customer.name,</span>
+<span class='line line-13 ' >            purchase_price: purchase_price.price || 0)</span>
+<span class='line line-14 ' >  end</span>
+<span class='line line-15 ' >end</span></code></pre>
+</section>
+<section class='BULLETS'>
+<h1>Better</h1>
+<ul>
+<li><tt>PurchasePresenter</tt>'s <em>interface</em> is decoupled from where the values come from - it's just a dumb struct</li>
+<li>It can be replaced</li>
+<li>It can be constructed another way, e.g. a series of API calls</li>
+<li>Same effort to implement</li>
+</ul>
+</section>
+<section class='CODE'>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class MySnazzyService</span>
+<span class='line line-2 ' >  def doit_now_i_am_here(predator)</span>
+<span class='line line-3 ' >    result = bunch_of_complex_logic(predator)</span>
+<span class='line line-4 ' >    CIAMailer.team_lost(result)</span>
+<span class='line line-5 ' >  end</span>
+<span class='line line-6 ' >end</span></code></pre>
+</section>
+<section class='CODE'>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class MySnazzyService</span>
+<span class='line line-2 ' >  def doit_now_i_am_here(predator)</span>
+<span class='line line-3 ' >    result = bunch_of_complex_logic(predator)</span>
+<span class='line line-4 ' >    CIAMailer.team_lost(result).deliver # OOPS</span>
+<span class='line line-5 ' >  end</span>
+<span class='line line-6 ' >end</span></code></pre>
+</section>
+<section class='CODE'>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class MySnazzyService</span>
+<span class='line line-2 ' >  def doit_now_i_am_here(predator)</span>
+<span class='line line-3 ' >    result = bunch_of_complex_logic(predator)</span>
+<span class='line line-4 ' >    Email.send(:team_lost,result)</span>
+<span class='line line-5 ' >  end</span>
+<span class='line line-6 ' >end</span>
+<span class='line line-7 ' ></span>
+<span class='line line-8 ' >class Email</span>
+<span class='line line-9 ' >  def self.send(email,*args)</span>
+<span class='line line-10 ' >    CIAMailer.send(email,args)</span>
+<span class='line line-11 ' >  end</span>
+<span class='line line-12 ' >end</span></code></pre>
+</section>
+<section class='BULLETS'>
+<h1>Better</h1>
+<ul>
+<li><tt>Email</tt> can...</li>
+<li>...<strong>Be replaced!</strong></li>
+</ul>
+</section>
+<section class='CODE'>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class Email</span>
+<span class='line line-2 ' >  def self.send(email,*args)</span>
+<span class='line line-3 ' >    CIAMailer.send(email,args)</span>
+<span class='line line-4 ' >  end</span>
+<span class='line line-5 ' >end</span></code></pre>
+</section>
+<section class='CODE'>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class Email</span>
+<span class='line line-2 ' >  def self.send(email,*args)</span>
+<span class='line line-3 ' >    queue(:email, ->() {</span>
+<span class='line line-4 ' >      CIAMailer.send(email,args)</span>
+<span class='line line-5 ' >    }</span>
+<span class='line line-6 ' >  end</span>
+<span class='line line-7 ' >end</span></code></pre>
+</section>
+<section class='SECTION'>
+<h1>Sensing a theme?</h1>
+</section>
+<section class='SECTION'>
+<h1>Step 3 - Use Your Database</h1>
+</section>
+<section class='CODE'>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >def up</span>
+<span class='line line-2 ' >  create_table :things do |t|</span>
+<span class='line line-3 ' >    t.belongs_to :customer</span>
+<span class='line line-4 ' >    t.string     :name</span>
+<span class='line line-5 ' >    t.integer    :thing_type</span>
+<span class='line line-6 ' >    t.timestamps</span>
+<span class='line line-7 ' >  end</span>
+<span class='line line-8 ' >end</span></code></pre>
+</section>
+<section class='BULLETS'>
+<h1>Who needs data integrity?</h1>
+<ul>
+<li>nullable by default</li>
+<li>no foreign keys</li>
+<li>no indexes</li>
+</ul>
+</section>
+<section class='CODE'>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >def up</span>
+<span class='line line-2 ' >  create_table :things do |t|</span>
+<span class='line line-3 ' >    t.belongs_to :customer,   null: false</span>
+<span class='line line-4 ' >    t.string     :name,       null: true</span>
+<span class='line line-5 ' >    t.integer    :thing_type, null: false</span>
+<span class='line line-6 ' >    t.timestamps</span>
+<span class='line line-7 ' >  end</span>
+<span class='line line-8 ' >  add_index :things, [:thing_type]</span>
+<span class='line line-9 ' >  execute "ALTER table things </span>
+<span class='line line-10 ' >           ADD FOREIGN KEY </span>
+<span class='line line-11 ' >           (customer_id) REFERENCES customer(id);"</span>
+<span class='line line-12 ' >end</span></code></pre>
+</section>
+<section class='BULLETS'>
+<h1>Better</h1>
+<ul>
+<li><tt>null: true</tt> shows intent, not forgetfulness</li>
+<li>index what you'll query on</li>
+<li>foreign keys keep data safe from prying shell scripts</li>
+</ul>
 </section>
 
   </div></body>

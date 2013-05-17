@@ -63,18 +63,22 @@ Hexagonal Rails
 images/graph.png
 
 !SECTION
-When the time comes, how can we be prepared?
+When the time comes
+how can we be prepared?
 
 !SECTION
 Oh yes, that time will come.
 
 !SECTION
-Two Words: Admin Interface
+Two Words
+Admin Interface
 
 !SECTION
-Single Repsonsibility Principle
+Single 
+Repsonsibility 
+Principle
 
-!CODE
+!CODE: language=ruby
 class Person < ActiveRecord::Base
   # name, birthdate, password in DB
 
@@ -86,7 +90,7 @@ end
 !SECTION
 Not bad (use obama)
 
-!CODE
+!CODE: language=ruby
 class Person < ActiveRecord::Base
 
   # name, birthdate, password in DB
@@ -104,7 +108,7 @@ end
 !SECTION
 Hmmmm
 
-!CODE
+!CODE: language=ruby
 class Person < ActiveRecord::Base
 
   # name, birthdate, password in DB
@@ -155,5 +159,455 @@ class Person < ActiveRecord::Base
   end
 end
 
-!SECTIOn
+!SECTION
 AUGH!
+
+!SECTION
+We don't want this in our models!
+
+!SECTION
+Why do we allow this in our apps?
+
+!SECTION
+But, but
+YAGNI!
+
+!QUOTE
+<a href="http://c2.com/cgi/wiki?YouArentGonnaNeedIt">YAGNI</a>
+<blockquote>Always implement things when you actually need them, never when you just foresee that you need them.</blockquote>
+
+!SECTION
+Don't waste time
+building things you don't know you'll need
+
+!SECTION
+Code <strong>will</strong> change
+
+!SECTION
+Can we make those changes easier
+without wasting time/effort now?
+
+!SECTION
+Yes we can (use obama-style image)
+
+!BULLETS
+Changes we want to be easy
+* Data from NOT the database
+* NOT your Rails app accessing the database
+* Move things to the background
+* Shared business logic
+
+!SECTION
+Data from NOT the database
+
+!CODE: language=ruby
+def show
+  @purchases = Person.find(params[:id]).
+    purchases.
+    successful.
+    shipped.
+    received_since(4.days.ago)
+  end
+end
+
+!SECTION
+NOT your Rails app accessing the database
+
+!CODE: language=bash
+#!/bin/bash
+echo "update people set whatever=true" | \
+       psql ENV["DATABASE_URL"]
+echo "select * from purchases where date > now() - interval(1,day)" | \
+       psql ENV["DATABASE_URL"] | \
+       csv_then_mail_ceo.pl
+
+!SECTION
+Move things to the background
+
+!CODE: language=ruby
+def create
+  person = Person.find(params[:id])
+  @purchase = Purchase.create(params)
+  if purchase.valid?
+    credit_card = person.credit_card(params[:credit_card_id])
+    result = ThirdPartyCreditCardCharger.charge(
+        purchase.price,
+        credit_card)
+    unless result.success?
+      flash[:error] = result.error
+      render "edit"
+    end
+  else
+    render "edit"
+  end
+end
+
+!CODE: callout=6,7,8
+def create
+  person = Person.find(params[:id])
+  @purchase = Purchase.create(params)
+  if purchase.valid?
+    credit_card = person.credit_card(params[:credit_card_id])
+    result = ThirdPartyCreditCardCharger.charge(
+        purchase.price,
+        credit_card)
+    unless result.success?
+      flash[:error] = result.error
+      render "edit"
+    end
+  else
+    render "edit"
+  end
+end
+
+!SECTION
+Shared business logic
+
+!CODE: language=ruby
+# www.your-company.com
+def create
+  customer = current_user
+  purchase = Purchase.new(params, customer: customer)
+  if purchase.type == 'electronic'
+    if purchase.assets_available? &&
+       purchase.charge
+       redirect_to purchase.asset_url
+    else
+      queue_purchase_for_later(puchase)
+    end
+  else
+    purchase.charge!
+  end
+end
+
+# admin.your-company.com
+# CSR purchases on behalf of customer
+def create
+  customer = Customer.find(params[:customer_id])
+  purchase = Purchase.new(params, customer: customer)
+  if purchase.type == 'electronic'
+    if purchase.assets_available? &&
+       purchase.charge
+       @asset_url = purchase.asset_url
+    else
+      flash[:error] = "Asset not ready for customer download"
+    end
+  else
+    purchase.charge!
+  end
+end
+
+!CODE: callout=5,6,7,13,22,23,24,30
+# www.your-company.com
+def create
+  customer = current_user
+  purchase = Purchase.new(params, customer: customer)
+  if purchase.type == 'electronic'
+    if purchase.assets_available? &&
+       purchase.charge
+       redirect_to purchase.asset_url
+    else
+      queue_purchase_for_later(puchase)
+    end
+  else
+    purchase.charge!
+  end
+end
+
+# admin.your-company.com
+# CSR purchases on behalf of customer
+def create
+  customer = Customer.find(params[:customer_id])
+  purchase = Purchase.new(params, customer: customer)
+  if purchase.type == 'electronic'
+    if purchase.assets_available? &&
+       purchase.charge
+       @asset_url = purchase.asset_url
+    else
+      flash[:error] = "Asset not ready for customer download"
+    end
+  else
+    purchase.charge!
+  end
+end
+
+!SECTION
+What if these are (or become) different apps?
+
+!BULLETS
+Why worry now?
+* Chance of you "not needing it" ~ 0
+* When you do, it will be later than you "should" deal with it
+
+!SECTION
+Step 1 - Deployment
+
+!SECTION
+"Let's just keep it in www because it's too much of a pain to make a new app"
+
+!IMAGE
+Picard facepalm
+
+!BULLETS
+Frictionless deployments
+* One step deploy
+* New apps self-service (or VERY low friction)
+* Learn you some scripting
+* App generators
+
+!BULLETS
+App Generators
+* Use existing app as a template
+* exception notifications, performance monitoring, logging, authentication, etc.
+
+!SECTION
+Step 2 - Light Indirection
+
+!SECTION
+Business Logic
+It's not to go in your models
+(nor your controllers)
+
+!BULLETS
+Where?!?!?!?!?
+* You don't need DCI
+* You don't need a DSL
+* You don't need a framework
+
+!SECTION
+Make a class
+
+!CODE: language=ruby
+def create
+  customer = current_user
+  purchase = Purchase.new(params, customer: customer)
+  if purchase.type == 'electronic'
+    if purchase.assets_available? &&
+       purchase.charge
+       redirect_to purchase.asset_url
+    else
+      queue_purchase_for_later(puchase)
+    end
+  else
+    purchase.charge!
+  end
+end
+
+!CODE: language=ruby callout=3,4,5,6,8,10,11
+def create
+  customer = current_user
+  purchase = Purchase.new(params, customer: customer)
+  if purchase.type == 'electronic'
+    if purchase.assets_available? &&
+       purchase.charge
+       redirect_to purchase.asset_url
+    else
+      queue_purchase_for_later(puchase)
+    end
+  else
+    purchase.charge!
+  end
+end
+
+!CODE: language=ruby
+def create
+  customer = current_user
+  result = PurchaseService.purchase!(customer,params)
+  unless result.success?
+    @purchase = result.purchase
+    render "edit"
+  end
+end
+
+!CODE: language=ruby
+class PurchaseService # this name sucks
+  def self.purchase!(customer,params)
+    purchase = Purchase.new(params, customer: customer)
+    return Results.unsuccessful(purchase) unless purchase.valid?
+    if purchase.type == 'electronic'
+      if purchase.assets_available? &&
+         purchase.charge
+      else
+        queue_purchase_for_later(puchase)
+      end
+    else
+      purchase.charge!
+    end
+    Result.successful(purchase)
+  end
+end
+
+!BULLETS
+Why?
+* Same amount of code
+* Cleaner, better factored
+* <tt>PurchaseService</tt>'s implementation can be replaced
+
+!CODE: language=ruby
+def show
+  @purchases = Person.find(params[:id]).
+    purchases.
+    successful.
+    shipped.
+    received_since(4.days.ago)
+  end
+end
+
+!CODE: language=ruby
+def show
+  @purchases = PurchaseSearchService.recently_received(
+      Person.find(params[:id]))
+  end
+end
+
+class PurchaseSearchService
+  def self.recently_received(person)
+    person.purchases.
+      successful.
+      shipped.
+      received_since(4.days.ago)
+  end
+end
+
+!BULLETS
+Better
+* Controller is clearer
+* <tt>PurchaseSearchService</tt> interface can be replaced
+* Same code
+* Probably easier to test
+
+!CODE: language=ruby
+class PurchasePresenter
+  def initialize(purchase)
+    @purchase = purchase
+    @customer = purchase.customer
+  end
+
+  def customer_name
+    @customer.name
+  end
+
+  def purchase_price
+    @purchase.price || 0
+  end
+
+  # etc.
+end
+
+!CODE: language=ruby
+class PurchasePresenter
+  attr_reader :customer_name,
+              :purchase_price
+
+  def initialize(attribtues)
+    @customer_name = attributes[:customer_name]
+    @purchase_price = attributes[:purchase_price]
+    # etc., or use some reflection
+  end
+
+  def self.from_purchase(purchase)
+    self.new(customer_name: purchase.customer.name,
+            purchase_price: purchase_price.price || 0)
+  end
+end
+
+!BULLETS
+Better
+* <tt>PurchasePresenter</tt>'s <em>interface</em> is decoupled from where the values come from - it's just a dumb struct
+* It can be replaced
+* It can be constructed another way, e.g. a series of API calls
+* Same effort to implement
+
+!CODE: language=ruby
+class MySnazzyService
+  def doit_now_i_am_here(predator)
+    result = bunch_of_complex_logic(predator)
+    CIAMailer.team_lost(result)
+  end
+end
+
+!CODE: language=ruby
+class MySnazzyService
+  def doit_now_i_am_here(predator)
+    result = bunch_of_complex_logic(predator)
+    CIAMailer.team_lost(result).deliver # OOPS
+  end
+end
+
+!CODE: language=ruby
+class MySnazzyService
+  def doit_now_i_am_here(predator)
+    result = bunch_of_complex_logic(predator)
+    Email.send(:team_lost,result)
+  end
+end
+
+class Email
+  def self.send(email,*args)
+    CIAMailer.send(email,args)
+  end
+end
+
+!BULLETS
+Better
+* <tt>Email</tt> can...
+* ...<strong>Be replaced!</strong>
+
+!CODE: language=ruby
+class Email
+  def self.send(email,*args)
+    CIAMailer.send(email,args)
+  end
+end
+
+!CODE: language=ruby
+class Email
+  def self.send(email,*args)
+    queue(:email, ->() {
+      CIAMailer.send(email,args)
+    }
+  end
+end
+
+!SECTION
+Sensing a theme?
+
+!SECTION
+Step 3 - Use Your Database
+
+!CODE: language=ruby
+def up
+  create_table :things do |t|
+    t.belongs_to :customer
+    t.string     :name
+    t.integer    :thing_type
+    t.timestamps
+  end
+end
+
+!BULLETS
+Who needs data integrity?
+* nullable by default
+* no foreign keys
+* no indexes
+
+!CODE: language=ruby
+def up
+  create_table :things do |t|
+    t.belongs_to :customer,   null: false
+    t.string     :name,       null: true
+    t.integer    :thing_type, null: false
+    t.timestamps
+  end
+  add_index :things, [:thing_type]
+  execute "ALTER table things 
+           ADD FOREIGN KEY 
+           (customer_id) REFERENCES customer(id);"
+end
+
+!BULLETS
+Better
+* <tt>null: true</tt> shows intent, not forgetfulness
+* index what you'll query on
+* foreign keys keep data safe from prying shell scripts
+
