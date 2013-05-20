@@ -46,7 +46,6 @@
 <ul>
 <li>One giant monorail</li>
 <li>Array of payment-related services</li>
-<li>All Rails</li>
 </ul>
 </section>
 <section class='IMAGE'>
@@ -54,9 +53,7 @@
 </section>
 <section class='SECTION'>
 <h1>What's a MonoRail?</h1>
-</section>
-<section class='IMAGE'>
-<img src='images/monorail.jpg'>
+<h2><img src="images/monorail.jpg"></h2>
 </section>
 <section class='BULLETS'>
 <h1>A MonoRail</h1>
@@ -73,6 +70,7 @@
 <h1>Reality Check</h1>
 <ul>
 <li>Not building a blog</li>
+<li>Not building basecamp</li>
 <li>Not building web-based `rails c`</li>
 <li>You will (eventually) stray from the Golden Path</li>
 </ul>
@@ -89,117 +87,12 @@
 <li>In-request processing</li>
 </ul>
 </section>
-<section class='SECTION'>
-<h1>Hexagonal Rails</h1>
-</section>
 <section class='IMAGE'>
 <img src='images/graph.png'>
 </section>
 <section class='SECTION'>
 <h1>When the time comes</h1>
 <h2>how can we be prepared?</h2>
-</section>
-<section class='SECTION'>
-<h1>Oh yes, that time will come.</h1>
-</section>
-<section class='SECTION'>
-<h1>Two Words</h1>
-<h2>Admin Interface</h2>
-</section>
-<section class='SECTION'>
-<h1>Single </h1>
-<h2>Repsonsibility </h2>
-<h3>Principle</h3>
-</section>
-<section class='CODE'>
-<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class Person < ActiveRecord::Base</span>
-<span class='line line-2 ' >  # name, birthdate, password in DB</span>
-<span class='line line-3 ' ></span>
-<span class='line line-4 ' >  def age</span>
-<span class='line line-5 ' >    Date.now - self.birthdate</span>
-<span class='line line-6 ' >  end</span>
-<span class='line line-7 ' >end</span></code></pre>
-</section>
-<section class='SECTION'>
-<h1>Not bad (use obama)</h1>
-</section>
-<section class='CODE'>
-<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class Person < ActiveRecord::Base</span>
-<span class='line line-2 ' ></span>
-<span class='line line-3 ' >  # name, birthdate, password in DB</span>
-<span class='line line-4 ' >  def age</span>
-<span class='line line-5 ' >    Date.now - @birthdate</span>
-<span class='line line-6 ' >  end</span>
-<span class='line line-7 ' ></span>
-<span class='line line-8 ' >  def signup(password)</span>
-<span class='line line-9 ' >    password = encrypt(password)</span>
-<span class='line line-10 ' >    save</span>
-<span class='line line-11 ' >    UserMailer.welcome_email(self).deliver</span>
-<span class='line line-12 ' >  end</span>
-<span class='line line-13 ' >end</span></code></pre>
-</section>
-<section class='SECTION'>
-<h1>Hmmmm</h1>
-</section>
-<section class='CODE'>
-<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class Person < ActiveRecord::Base</span>
-<span class='line line-2 ' ></span>
-<span class='line line-3 ' >  # name, birthdate, password in DB</span>
-<span class='line line-4 ' >  def age</span>
-<span class='line line-5 ' >    Date.now - @birthdate</span>
-<span class='line line-6 ' >  end</span>
-<span class='line line-7 ' ></span>
-<span class='line line-8 ' >  def signup(password)</span>
-<span class='line line-9 ' >    password = encrypt(password)</span>
-<span class='line line-10 ' >    save</span>
-<span class='line line-11 ' >    UserMailer.welcome_email(self).deliver</span>
-<span class='line line-12 ' >  end</span>
-<span class='line line-13 ' ></span>
-<span class='line line-14 ' >  def purchase(item)</span>
-<span class='line line-15 ' >    # ...</span>
-<span class='line line-16 ' >  end</span>
-<span class='line line-17 ' ></span>
-<span class='line line-18 ' >  def credit_cards(item)</span>
-<span class='line line-19 ' >    # ...</span>
-<span class='line line-20 ' >  end</span>
-<span class='line line-21 ' ></span>
-<span class='line line-22 ' >  def referrals</span>
-<span class='line line-23 ' >    # ...</span>
-<span class='line line-24 ' >  end</span>
-<span class='line line-25 ' ></span>
-<span class='line line-26 ' >  def refer_user(user)</span>
-<span class='line line-27 ' >    # ...</span>
-<span class='line line-28 ' >  end</span>
-<span class='line line-29 ' ></span>
-<span class='line line-30 ' >  def is_admin?</span>
-<span class='line line-31 ' >    # ...</span>
-<span class='line line-32 ' >  end</span>
-<span class='line line-33 ' ></span>
-<span class='line line-34 ' >  def is_super_admin?</span>
-<span class='line line-35 ' >    # ...</span>
-<span class='line line-36 ' >  end</span>
-<span class='line line-37 ' ></span>
-<span class='line line-38 ' >  def request_refund</span>
-<span class='line line-39 ' >    # ...</span>
-<span class='line line-40 ' >  end</span>
-<span class='line line-41 ' ></span>
-<span class='line line-42 ' >  def paypal_credentials</span>
-<span class='line line-43 ' >    # ...</span>
-<span class='line line-44 ' >  end</span>
-<span class='line line-45 ' ></span>
-<span class='line line-46 ' >  def start_some_business_process</span>
-<span class='line line-47 ' >    # ...</span>
-<span class='line line-48 ' >  end</span>
-<span class='line line-49 ' >end</span></code></pre>
-</section>
-<section class='SECTION'>
-<h1>AUGH!</h1>
-</section>
-<section class='SECTION'>
-<h1>We don't want this in our models!</h1>
-</section>
-<section class='SECTION'>
-<h1>Why do we allow this in our apps?</h1>
 </section>
 <section class='SECTION'>
 <h1>But, but</h1>
@@ -210,8 +103,8 @@
 <h2><blockquote>Always implement things when you actually need them, never when you just foresee that you need them.</blockquote></h2>
 </section>
 <section class='SECTION'>
-<h1>Don't waste time</h1>
-<h2>building things you don't know you'll need</h2>
+<h1>i.e.</h1>
+<h2>Don't waste time building things you don't know you'll need</h2>
 </section>
 <section class='SECTION'>
 <h1>Code <strong>will</strong> change</h1>
@@ -223,157 +116,39 @@
 <section class='SECTION'>
 <h1>Yes we can (use obama-style image)</h1>
 </section>
-<section class='BULLETS'>
+<section class='SECTION'>
 <h1>Changes we want to be easy</h1>
-<ul>
-<li>Data from NOT the database</li>
-<li>NOT your Rails app accessing the database</li>
-<li>Move things to the background</li>
-<li>Shared business logic</li>
-</ul>
 </section>
 <section class='SECTION'>
-<h1>Data from NOT the database</h1>
-</section>
-<section class='CODE'>
-<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >def show</span>
-<span class='line line-2 ' >  @purchases = Person.find(params[:id]).</span>
-<span class='line line-3 ' >    purchases.</span>
-<span class='line line-4 ' >    successful.</span>
-<span class='line line-5 ' >    shipped.</span>
-<span class='line line-6 ' >    received_since(4.days.ago)</span>
-<span class='line line-7 ' >  end</span>
-<span class='line line-8 ' >end</span></code></pre>
+<h1>Changes we want to be easy</h1>
+<h2>Splitting up the database</h2>
 </section>
 <section class='SECTION'>
-<h1>NOT your Rails app accessing the database</h1>
-</section>
-<section class='CODE'>
-<pre><code class='bash' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >#!/bin/bash</span>
-<span class='line line-2 ' >echo "update people set whatever=true" | \</span>
-<span class='line line-3 ' >       psql ENV["DATABASE_URL"]</span>
-<span class='line line-4 ' >echo "select * from purchases where date > now() - interval(1,day)" | \</span>
-<span class='line line-5 ' >       psql ENV["DATABASE_URL"] | \</span>
-<span class='line line-6 ' >       csv_then_mail_ceo.pl</span></code></pre>
+<h1>Changes we want to be easy</h1>
+<h2>Other apps accessing our database</h2>
 </section>
 <section class='SECTION'>
-<h1>Move things to the background</h1>
-</section>
-<section class='CODE'>
-<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >def create</span>
-<span class='line line-2 ' >  person = Person.find(params[:id])</span>
-<span class='line line-3 ' >  @purchase = Purchase.create(params)</span>
-<span class='line line-4 ' >  if purchase.valid?</span>
-<span class='line line-5 ' >    credit_card = person.credit_card(params[:credit_card_id])</span>
-<span class='line line-6 ' >    result = ThirdPartyCreditCardCharger.charge(</span>
-<span class='line line-7 ' >        purchase.price,</span>
-<span class='line line-8 ' >        credit_card)</span>
-<span class='line line-9 ' >    unless result.success?</span>
-<span class='line line-10 ' >      flash[:error] = result.error</span>
-<span class='line line-11 ' >      render "edit"</span>
-<span class='line line-12 ' >    end</span>
-<span class='line line-13 ' >  else</span>
-<span class='line line-14 ' >    render "edit"</span>
-<span class='line line-15 ' >  end</span>
-<span class='line line-16 ' >end</span></code></pre>
-</section>
-<section class='CODE'>
-<pre><code data-strikeouts='' data-callout-lines='6,7,8'><span class='line line-1 ' >def create</span>
-<span class='line line-2 ' >  person = Person.find(params[:id])</span>
-<span class='line line-3 ' >  @purchase = Purchase.create(params)</span>
-<span class='line line-4 ' >  if purchase.valid?</span>
-<span class='line line-5 ' >    credit_card = person.credit_card(params[:credit_card_id])</span>
-<div class='lines-callout'><span class='line line-6 line-callout' >    result = ThirdPartyCreditCardCharger.charge(</span>
-<span class='line line-7 line-callout' >        purchase.price,</span>
-<span class='line line-8 line-callout' >        credit_card)</span>
-</div><span class='line line-9 ' >    unless result.success?</span>
-<span class='line line-10 ' >      flash[:error] = result.error</span>
-<span class='line line-11 ' >      render "edit"</span>
-<span class='line line-12 ' >    end</span>
-<span class='line line-13 ' >  else</span>
-<span class='line line-14 ' >    render "edit"</span>
-<span class='line line-15 ' >  end</span>
-<span class='line line-16 ' >end</span></code></pre>
+<h1>Changes we want to be easy</h1>
+<h2>Do work in the background</h2>
 </section>
 <section class='SECTION'>
-<h1>Shared business logic</h1>
-</section>
-<section class='CODE'>
-<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' ># www.your-company.com</span>
-<span class='line line-2 ' >def create</span>
-<span class='line line-3 ' >  customer = current_user</span>
-<span class='line line-4 ' >  purchase = Purchase.new(params, customer: customer)</span>
-<span class='line line-5 ' >  if purchase.type == 'electronic'</span>
-<span class='line line-6 ' >    if purchase.assets_available? &&</span>
-<span class='line line-7 ' >       purchase.charge</span>
-<span class='line line-8 ' >       redirect_to purchase.asset_url</span>
-<span class='line line-9 ' >    else</span>
-<span class='line line-10 ' >      queue_purchase_for_later(puchase)</span>
-<span class='line line-11 ' >    end</span>
-<span class='line line-12 ' >  else</span>
-<span class='line line-13 ' >    purchase.charge!</span>
-<span class='line line-14 ' >  end</span>
-<span class='line line-15 ' >end</span>
-<span class='line line-16 ' ></span>
-<span class='line line-17 ' ># admin.your-company.com</span>
-<span class='line line-18 ' ># CSR purchases on behalf of customer</span>
-<span class='line line-19 ' >def create</span>
-<span class='line line-20 ' >  customer = Customer.find(params[:customer_id])</span>
-<span class='line line-21 ' >  purchase = Purchase.new(params, customer: customer)</span>
-<span class='line line-22 ' >  if purchase.type == 'electronic'</span>
-<span class='line line-23 ' >    if purchase.assets_available? &&</span>
-<span class='line line-24 ' >       purchase.charge</span>
-<span class='line line-25 ' >       @asset_url = purchase.asset_url</span>
-<span class='line line-26 ' >    else</span>
-<span class='line line-27 ' >      flash[:error] = "Asset not ready for customer download"</span>
-<span class='line line-28 ' >    end</span>
-<span class='line line-29 ' >  else</span>
-<span class='line line-30 ' >    purchase.charge!</span>
-<span class='line line-31 ' >  end</span>
-<span class='line line-32 ' >end</span></code></pre>
-</section>
-<section class='CODE'>
-<pre><code data-strikeouts='' data-callout-lines='5,6,7,13,22,23,24,30'><span class='line line-1 ' ># www.your-company.com</span>
-<span class='line line-2 ' >def create</span>
-<span class='line line-3 ' >  customer = current_user</span>
-<span class='line line-4 ' >  purchase = Purchase.new(params, customer: customer)</span>
-<div class='lines-callout'><span class='line line-5 line-callout' >  if purchase.type == 'electronic'</span>
-<span class='line line-6 line-callout' >    if purchase.assets_available? &&</span>
-<span class='line line-7 line-callout' >       purchase.charge</span>
-</div><span class='line line-8 ' >       redirect_to purchase.asset_url</span>
-<span class='line line-9 ' >    else</span>
-<span class='line line-10 ' >      queue_purchase_for_later(puchase)</span>
-<span class='line line-11 ' >    end</span>
-<span class='line line-12 ' >  else</span>
-<div class='lines-callout'><span class='line line-13 line-callout' >    purchase.charge!</span>
-</div><span class='line line-14 ' >  end</span>
-<span class='line line-15 ' >end</span>
-<span class='line line-16 ' ></span>
-<span class='line line-17 ' ># admin.your-company.com</span>
-<span class='line line-18 ' ># CSR purchases on behalf of customer</span>
-<span class='line line-19 ' >def create</span>
-<span class='line line-20 ' >  customer = Customer.find(params[:customer_id])</span>
-<span class='line line-21 ' >  purchase = Purchase.new(params, customer: customer)</span>
-<div class='lines-callout'><span class='line line-22 line-callout' >  if purchase.type == 'electronic'</span>
-<span class='line line-23 line-callout' >    if purchase.assets_available? &&</span>
-<span class='line line-24 line-callout' >       purchase.charge</span>
-</div><span class='line line-25 ' >       @asset_url = purchase.asset_url</span>
-<span class='line line-26 ' >    else</span>
-<span class='line line-27 ' >      flash[:error] = "Asset not ready for customer download"</span>
-<span class='line line-28 ' >    end</span>
-<span class='line line-29 ' >  else</span>
-<div class='lines-callout'><span class='line line-30 line-callout' >    purchase.charge!</span>
-</div><span class='line line-31 ' >  end</span>
-<span class='line line-32 ' >end</span></code></pre>
-</section>
-<section class='SECTION'>
-<h1>What if these are (or become) different apps?</h1>
+<h1>Changes we want to be easy</h1>
+<h2>Share business logic</h2>
 </section>
 <section class='BULLETS'>
 <h1>Why worry now?</h1>
 <ul>
 <li>Chance of you "not needing it" ~ 0</li>
 <li>When you do, it will be later than you "should" deal with it</li>
+</ul>
+</section>
+<section class='BULLETS'>
+<h1>Avoiding the MonoRail</h1>
+<ul>
+<li>Make deployment easy</li>
+<li>Better-factored code</li>
+<li>Use your database</li>
+<li></li>
 </ul>
 </section>
 <section class='SECTION'>

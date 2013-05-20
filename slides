@@ -20,16 +20,13 @@ Lead Engineer @ Stitch Fix
 Former Engineer @ LivingSocial
 * One giant monorail
 * Array of payment-related services
-* All Rails
 
 !IMAGE
 images/book.png
 
 !SECTION
 What's a MonoRail?
-
-!IMAGE
-images/monorail.jpg
+<img src="images/monorail.jpg">
 
 !BULLETS
 A MonoRail
@@ -43,6 +40,7 @@ images/monorail_busted.png
 !BULLETS
 Reality Check
 * Not building a blog
+* Not building Basecamp
 * Not building web-based `rails c`
 * You will (eventually) stray from the Golden Path
 
@@ -52,12 +50,8 @@ images/god_emperor.jpg
 !BULLETS
 The Golden Path
 * All logic in models
-* One database
-* Rails Mailers
+* One database, owned by Rails
 * In-request processing
-
-!SECTION
-Hexagonal Rails
 
 !IMAGE
 images/graph.png
@@ -67,118 +61,12 @@ When the time comes
 how can we be prepared?
 
 !SECTION
-Oh yes, that time will come.
-
-!SECTION
-Two Words
-Admin Interface
-
-!SECTION
-Single 
-Repsonsibility 
-Principle
-
-!CODE: language=ruby
-class Person < ActiveRecord::Base
-  # name, birthdate, password in DB
-
-  def age
-    Date.now - self.birthdate
-  end
-end
-
-!SECTION
-Not bad (use obama)
-
-!CODE: language=ruby
-class Person < ActiveRecord::Base
-
-  # name, birthdate, password in DB
-  def age
-    Date.now - @birthdate
-  end
-
-  def signup(password)
-    password = encrypt(password)
-    save
-    UserMailer.welcome_email(self).deliver
-  end
-end
-
-!SECTION
-Hmmmm
-
-!CODE: language=ruby
-class Person < ActiveRecord::Base
-
-  # name, birthdate, password in DB
-  def age
-    Date.now - @birthdate
-  end
-
-  def signup(password)
-    password = encrypt(password)
-    save
-    UserMailer.welcome_email(self).deliver
-  end
-
-  def purchase(item)
-    # ...
-  end
-
-  def credit_cards(item)
-    # ...
-  end
-
-  def referrals
-    # ...
-  end
-
-  def refer_user(user)
-    # ...
-  end
-
-  def is_admin?
-    # ...
-  end
-
-  def is_super_admin?
-    # ...
-  end
-
-  def request_refund
-    # ...
-  end
-
-  def paypal_credentials
-    # ...
-  end
-
-  def start_some_business_process
-    # ...
-  end
-end
-
-!SECTION
-AUGH!
-
-!SECTION
-We don't want this in our models!
-
-!SECTION
-Why do we allow this in our apps?
-
-!SECTION
 But, but
 YAGNI!
 
 !QUOTE
 <a href="http://c2.com/cgi/wiki?YouArentGonnaNeedIt">YAGNI</a>
 <blockquote>Always implement things when you actually need them, never when you just foresee that you need them.</blockquote>
-
-!SECTION
-Don't waste time
-building things you don't know you'll need
 
 !SECTION
 Code <strong>will</strong> change
@@ -190,170 +78,48 @@ without wasting time/effort now?
 !SECTION
 Yes we can (use obama-style image)
 
-!BULLETS
+!SECTION
 Changes we want to be easy
-* Data from NOT the database
-* NOT your Rails app accessing the database
-* Move things to the background
-* Shared business logic
 
 !SECTION
-Data from NOT the database
-
-!CODE: language=ruby
-def show
-  @purchases = Person.find(params[:id]).
-    purchases.
-    successful.
-    shipped.
-    received_since(4.days.ago)
-  end
-end
+Splitting up the database
 
 !SECTION
-NOT your Rails app accessing the database
-
-!CODE: language=bash
-#!/bin/bash
-echo "update people set whatever=true" | \
-       psql ENV["DATABASE_URL"]
-echo "select * from purchases where date > now() - interval(1,day)" | \
-       psql ENV["DATABASE_URL"] | \
-       csv_then_mail_ceo.pl
+Other apps accessing our database
 
 !SECTION
-Move things to the background
-
-!CODE: language=ruby
-def create
-  person = Person.find(params[:id])
-  @purchase = Purchase.create(params)
-  if purchase.valid?
-    credit_card = person.credit_card(params[:credit_card_id])
-    result = ThirdPartyCreditCardCharger.charge(
-        purchase.price,
-        credit_card)
-    unless result.success?
-      flash[:error] = result.error
-      render "edit"
-    end
-  else
-    render "edit"
-  end
-end
-
-!CODE: callout=6,7,8
-def create
-  person = Person.find(params[:id])
-  @purchase = Purchase.create(params)
-  if purchase.valid?
-    credit_card = person.credit_card(params[:credit_card_id])
-    result = ThirdPartyCreditCardCharger.charge(
-        purchase.price,
-        credit_card)
-    unless result.success?
-      flash[:error] = result.error
-      render "edit"
-    end
-  else
-    render "edit"
-  end
-end
+Do work in the background
 
 !SECTION
-Shared business logic
-
-!CODE: language=ruby
-# www.your-company.com
-def create
-  customer = current_user
-  purchase = Purchase.new(params, customer: customer)
-  if purchase.type == 'electronic'
-    if purchase.assets_available? &&
-       purchase.charge
-       redirect_to purchase.asset_url
-    else
-      queue_purchase_for_later(puchase)
-    end
-  else
-    purchase.charge!
-  end
-end
-
-# admin.your-company.com
-# CSR purchases on behalf of customer
-def create
-  customer = Customer.find(params[:customer_id])
-  purchase = Purchase.new(params, customer: customer)
-  if purchase.type == 'electronic'
-    if purchase.assets_available? &&
-       purchase.charge
-       @asset_url = purchase.asset_url
-    else
-      flash[:error] = "Asset not ready for customer download"
-    end
-  else
-    purchase.charge!
-  end
-end
-
-!CODE: callout=5,6,7,13,22,23,24,30
-# www.your-company.com
-def create
-  customer = current_user
-  purchase = Purchase.new(params, customer: customer)
-  if purchase.type == 'electronic'
-    if purchase.assets_available? &&
-       purchase.charge
-       redirect_to purchase.asset_url
-    else
-      queue_purchase_for_later(puchase)
-    end
-  else
-    purchase.charge!
-  end
-end
-
-# admin.your-company.com
-# CSR purchases on behalf of customer
-def create
-  customer = Customer.find(params[:customer_id])
-  purchase = Purchase.new(params, customer: customer)
-  if purchase.type == 'electronic'
-    if purchase.assets_available? &&
-       purchase.charge
-       @asset_url = purchase.asset_url
-    else
-      flash[:error] = "Asset not ready for customer download"
-    end
-  else
-    purchase.charge!
-  end
-end
-
-!SECTION
-What if these are (or become) different apps?
+Share business logic
 
 !BULLETS
 Why worry now?
 * Chance of you "not needing it" ~ 0
 * When you do, it will be later than you "should" deal with it
 
-!SECTION
-Step 1 - Deployment
+!BULLETS
+Avoiding the MonoRail
+* Make deployment easy
+* Better-factored code
+* Use your database
 
 !SECTION
-"Let's just keep it in www because it's too much of a pain to make a new app"
+Make Deployment Easy
 
-!IMAGE
-Picard facepalm
+!BULLETS 
+Creating a MonoRail in one step
+* "Let's just put that new feature it in the app because it's too much of a pain to make a new app"
 
 !BULLETS
 Frictionless deployments
 * One step deploy
-* New apps self-service (or VERY low friction)
 * Learn you some scripting
-* App generators
+
+!BULLETS
+Frictionless Launches
+* Self-service new app setup
+* One-click "standard configuration"
 
 !BULLETS
 App Generators
