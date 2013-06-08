@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>You might "Are Gonna Need It" - Avoiding the MonoRail</title>
+    <title>You might “Are Gonna Need It” - Avoiding the MonoRail</title>
+    <meta charset="utf-8">
     <script src="js/lib/jquery-1.8.0.min.js"></script>
     <script src="js/lib/highlight-7.1.min.js"></script>
     <script src="js/lib/jquerytypewriter.js"></script>
@@ -23,14 +24,14 @@
   </head>
   <body><div id="contents">
     <section class='TITLE'>
-<h1>You might "Are Gonna Need It"</h1>
+<h1>You might “Are Gonna Need It”</h1>
 <h2>Avoiding the MonoRail</h2>
 <h3>@davetron5000</h3>
 </section>
 <section class='SECTION'>
 <h1>Me</h1>
 </section>
-<section class='SECTION'>
+<section class='NORMAL'>
 <h1>@davetron5000</h1>
 </section>
 <section class='BULLETS'>
@@ -58,22 +59,99 @@
 <section class='BULLETS'>
 <h1>A MonoRail</h1>
 <ul>
-<li>Rails app</li>
 <li>Monolithic</li>
+<li>Rails app</li>
 <li>Too big, too hard to change over time</li>
 </ul>
 </section>
-<section class='IMAGE'>
-<img src='images/monorail_busted.png'>
+<section class='NORMAL'>
+<h1>It <strong>will</strong> happen</h1>
 </section>
 <section class='BULLETS'>
-<h1>Reality Check</h1>
+<h1>Fixing a MonoRail</h1>
 <ul>
-<li>Not building a blog</li>
-<li>Not building basecamp</li>
-<li>Not building web-based `rails c`</li>
-<li>You will (eventually) stray from the Golden Path</li>
+<li>Create new applications</li>
+<li>Split applications</li>
+<li>Extract Services</li>
 </ul>
+</section>
+<section class='NORMAL'>
+<h1>Can we prepare ourselves?</h1>
+</section>
+<section class='QUOTE'>
+<h1><a href="http://c2.com/cgi/wiki?YouArentGonnaNeedIt">YAGNI</a></h1>
+<h2><blockquote>Always implement things when you actually need them, never when you just foresee that you need them.</blockquote></h2>
+</section>
+<section class='BULLETS'>
+<h1>YAGNI is <strong>not</strong>:</h1>
+<ul>
+<li>Pooping out code</li>
+<li>A reason for technical debt</li>
+<li>An excuse for not thinking</li>
+</ul>
+</section>
+<section class='NORMAL'>
+<h1>Can we prepare ourselves...</h1>
+<h2>...without wasting time/effort now?</h2>
+</section>
+<section class='BULLETS'>
+<h1>Avoiding the MonoRail in 3 Steps</h1>
+<ul>
+<li>Make deployment and provisioning easy</li>
+<li>Use your database</li>
+<li>Better-factored code</li>
+</ul>
+</section>
+<section class='NUMSECTION'>
+<h1>1</h1>
+<h2>Make Deployment & Provisioning Easy</h2>
+</section>
+<section class='QUOTE'>
+<h1>Creating a MonoRail in one step</h1>
+<h2><blockquote>Let's just put that new feature it in the app because it's too much of a pain to make a new app</blockquote></h2>
+</section>
+<section class='NORMAL'>
+<h1>Frictionless Provisioning</h1>
+</section>
+<section class='NORMAL'>
+<h1><tt>rails new</tt> for <strong>your</strong> team</h1>
+</section>
+<section class='NORMAL'>
+<h1>Rails App Generator</h1>
+</section>
+<section class='NORMAL'>
+<h1>Provision and Deploy in one step</h1>
+</section>
+<section class='NORMAL'>
+<h1>Minimum Deployable Application</h1>
+</section>
+<section class='BULLETS'>
+<h1>Remove gatekeepers</h1>
+<ul>
+<li>QA ⇒ Better Tests</li>
+<li>Physical Deployment ⇒ Learn you some scripting</li>
+</ul>
+</section>
+<section class='IMAGE'>
+<img src='images/book.png'>
+</section>
+<section class='NORMAL'>
+<h1>Stand-up new services whenever they are needed</h1>
+</section>
+<section class='NORMAL'>
+<h1>Push changes without heavy coordination</h1>
+</section>
+<section class='NORMAL'>
+<h1>Discussions are about what apps to make,</h1>
+<h2>not how to make them.</h2>
+</section>
+<section class='NORMAL'>
+<h1>If all else fails…</h1>
+<h2>…use Rails engines to keep yourself honest</h2>
+</section>
+<section class='NUMSECTION'>
+<h1>2</h1>
+<h2>Use Your Database</h2>
 </section>
 <section class='IMAGE'>
 <img src='images/god_emperor.jpg'>
@@ -81,221 +159,103 @@
 <section class='BULLETS'>
 <h1>The Golden Path</h1>
 <ul>
-<li>All logic in models</li>
-<li>One database</li>
-<li>Rails Mailers</li>
-<li>In-request processing</li>
-</ul>
-</section>
-<section class='IMAGE'>
-<img src='images/graph.png'>
-</section>
-<section class='SECTION'>
-<h1>When the time comes</h1>
-<h2>how can we be prepared?</h2>
-</section>
-<section class='SECTION'>
-<h1>But, but</h1>
-<h2>YAGNI!</h2>
-</section>
-<section class='QUOTE'>
-<h1><a href="http://c2.com/cgi/wiki?YouArentGonnaNeedIt">YAGNI</a></h1>
-<h2><blockquote>Always implement things when you actually need them, never when you just foresee that you need them.</blockquote></h2>
-</section>
-<section class='SECTION'>
-<h1>i.e.</h1>
-<h2>Don't waste time building things you don't know you'll need</h2>
-</section>
-<section class='SECTION'>
-<h1>Code <strong>will</strong> change</h1>
-</section>
-<section class='SECTION'>
-<h1>Can we make those changes easier</h1>
-<h2>without wasting time/effort now?</h2>
-</section>
-<section class='SECTION'>
-<h1>Yes we can (use obama-style image)</h1>
-</section>
-<section class='SECTION'>
-<h1>Changes we want to be easy</h1>
-</section>
-<section class='SECTION'>
-<h1>Changes we want to be easy</h1>
-<h2>Splitting up the database</h2>
-</section>
-<section class='SECTION'>
-<h1>Changes we want to be easy</h1>
-<h2>Other apps accessing our database</h2>
-</section>
-<section class='SECTION'>
-<h1>Changes we want to be easy</h1>
-<h2>Do work in the background</h2>
-</section>
-<section class='SECTION'>
-<h1>Changes we want to be easy</h1>
-<h2>Share business logic</h2>
-</section>
-<section class='BULLETS'>
-<h1>Why worry now?</h1>
-<ul>
-<li>Chance of you "not needing it" ~ 0</li>
-<li>When you do, it will be later than you "should" deal with it</li>
-</ul>
-</section>
-<section class='BULLETS'>
-<h1>Avoiding the MonoRail</h1>
-<ul>
-<li>Make deployment easy</li>
-<li>Better-factored code</li>
-<li>Use your database</li>
-<li></li>
-</ul>
-</section>
-<section class='SECTION'>
-<h1>Step 1 - Deployment</h1>
-</section>
-<section class='SECTION'>
-<h1>"Let's just keep it in www because it's too much of a pain to make a new app"</h1>
-</section>
-<section class='IMAGE'>
-<img src='Picard facepalm'>
-</section>
-<section class='BULLETS'>
-<h1>Frictionless deployments</h1>
-<ul>
-<li>One step deploy</li>
-<li>New apps self-service (or VERY low friction)</li>
-<li>Learn you some scripting</li>
-<li>App generators</li>
-</ul>
-</section>
-<section class='BULLETS'>
-<h1>App Generators</h1>
-<ul>
-<li>Use existing app as a template</li>
-<li>exception notifications, performance monitoring, logging, authentication, etc.</li>
-</ul>
-</section>
-<section class='SECTION'>
-<h1>Step 2 - Light Indirection</h1>
-</section>
-<section class='SECTION'>
-<h1>Business Logic</h1>
-<h2>It's not to go in your models</h2>
-<h3>(nor your controllers)</h3>
-</section>
-<section class='BULLETS'>
-<h1>Where?!?!?!?!?</h1>
-<ul>
-<li>You don't need DCI</li>
-<li>You don't need a DSL</li>
-<li>You don't need a framework</li>
-</ul>
-</section>
-<section class='SECTION'>
-<h1>Make a class</h1>
-</section>
-<section class='CODE'>
-<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >def create</span>
-<span class='line line-2 ' >  customer = current_user</span>
-<span class='line line-3 ' >  purchase = Purchase.new(params, customer: customer)</span>
-<span class='line line-4 ' >  if purchase.type == 'electronic'</span>
-<span class='line line-5 ' >    if purchase.assets_available? &&</span>
-<span class='line line-6 ' >       purchase.charge</span>
-<span class='line line-7 ' >       redirect_to purchase.asset_url</span>
-<span class='line line-8 ' >    else</span>
-<span class='line line-9 ' >      queue_purchase_for_later(puchase)</span>
-<span class='line line-10 ' >    end</span>
-<span class='line line-11 ' >  else</span>
-<span class='line line-12 ' >    purchase.charge!</span>
-<span class='line line-13 ' >  end</span>
-<span class='line line-14 ' >end</span></code></pre>
-</section>
-<section class='CODE'>
-<pre><code class='ruby' data-strikeouts='' data-callout-lines='3,4,5,6,8,10,11'><span class='line line-1 ' >def create</span>
-<span class='line line-2 ' >  customer = current_user</span>
-<div class='lines-callout'><span class='line line-3 line-callout' >  purchase = Purchase.new(params, customer: customer)</span>
-<span class='line line-4 line-callout' >  if purchase.type == 'electronic'</span>
-<span class='line line-5 line-callout' >    if purchase.assets_available? &&</span>
-<span class='line line-6 line-callout' >       purchase.charge</span>
-</div><span class='line line-7 ' >       redirect_to purchase.asset_url</span>
-<div class='lines-callout'><span class='line line-8 line-callout' >    else</span>
-</div><span class='line line-9 ' >      queue_purchase_for_later(puchase)</span>
-<div class='lines-callout'><span class='line line-10 line-callout' >    end</span>
-<span class='line line-11 line-callout' >  else</span>
-</div><span class='line line-12 ' >    purchase.charge!</span>
-<span class='line line-13 ' >  end</span>
-<span class='line line-14 ' >end</span></code></pre>
-</section>
-<section class='CODE'>
-<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >def create</span>
-<span class='line line-2 ' >  customer = current_user</span>
-<span class='line line-3 ' >  result = PurchaseService.purchase!(customer,params)</span>
-<span class='line line-4 ' >  unless result.success?</span>
-<span class='line line-5 ' >    @purchase = result.purchase</span>
-<span class='line line-6 ' >    render "edit"</span>
-<span class='line line-7 ' >  end</span>
-<span class='line line-8 ' >end</span></code></pre>
-</section>
-<section class='CODE'>
-<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class PurchaseService # this name sucks</span>
-<span class='line line-2 ' >  def self.purchase!(customer,params)</span>
-<span class='line line-3 ' >    purchase = Purchase.new(params, customer: customer)</span>
-<span class='line line-4 ' >    return Results.unsuccessful(purchase) unless purchase.valid?</span>
-<span class='line line-5 ' >    if purchase.type == 'electronic'</span>
-<span class='line line-6 ' >      if purchase.assets_available? &&</span>
-<span class='line line-7 ' >         purchase.charge</span>
-<span class='line line-8 ' >      else</span>
-<span class='line line-9 ' >        queue_purchase_for_later(puchase)</span>
-<span class='line line-10 ' >      end</span>
-<span class='line line-11 ' >    else</span>
-<span class='line line-12 ' >      purchase.charge!</span>
-<span class='line line-13 ' >    end</span>
-<span class='line line-14 ' >    Result.successful(purchase)</span>
-<span class='line line-15 ' >  end</span>
-<span class='line line-16 ' >end</span></code></pre>
-</section>
-<section class='BULLETS'>
-<h1>Why?</h1>
-<ul>
-<li>Same amount of code</li>
-<li>Cleaner, better factored</li>
-<li><tt>PurchaseService</tt>'s implementation can be replaced</li>
+<li>No other apps touch the database</li>
+<li>Validations ensure data integrity</li>
 </ul>
 </section>
 <section class='CODE'>
-<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >def show</span>
-<span class='line line-2 ' >  @purchases = Person.find(params[:id]).</span>
-<span class='line line-3 ' >    purchases.</span>
-<span class='line line-4 ' >    successful.</span>
-<span class='line line-5 ' >    shipped.</span>
-<span class='line line-6 ' >    received_since(4.days.ago)</span>
-<span class='line line-7 ' >  end</span>
-<span class='line line-8 ' >end</span></code></pre>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >def up</span>
+<span class='line line-2 ' >  create_table :orders do |t|</span>
+<span class='line line-3 ' >    t.belongs_to :customer</span>
+<span class='line line-4 ' >    t.string     :name</span>
+<span class='line line-5 ' >    t.integer    :order_type</span>
+<span class='line line-6 ' >    t.date       :shipped_on</span>
+<span class='line line-7 ' >    t.timestamps</span>
+<span class='line line-8 ' >  end</span>
+<span class='line line-9 ' >end</span></code></pre>
 </section>
 <section class='CODE'>
-<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >def show</span>
-<span class='line line-2 ' >  @purchases = PurchaseSearchService.recently_received(</span>
-<span class='line line-3 ' >      Person.find(params[:id]))</span>
-<span class='line line-4 ' >  end</span>
-<span class='line line-5 ' >end</span>
-<span class='line line-6 ' ></span>
-<span class='line line-7 ' >class PurchaseSearchService</span>
-<span class='line line-8 ' >  def self.recently_received(person)</span>
-<span class='line line-9 ' >    person.purchases.</span>
-<span class='line line-10 ' >      successful.</span>
-<span class='line line-11 ' >      shipped.</span>
-<span class='line line-12 ' >      received_since(4.days.ago)</span>
-<span class='line line-13 ' >  end</span>
-<span class='line line-14 ' >end</span></code></pre>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >create_table :orders do |t|</span>
+<span class='line line-2 ' >  t.belongs_to :customer,   null: false</span>
+<span class='line line-3 ' >  t.string     :name,       null: true</span>
+<span class='line line-4 ' >  t.integer    :order_type, null: false</span>
+<span class='line line-5 ' >  t.date       :shipped_on, null: true</span>
+<span class='line line-6 ' >  t.timestamps</span>
+<span class='line line-7 ' >end</span>
+<span class='line line-8 ' >execute "ALTER table things </span>
+<span class='line line-9 ' >         ADD FOREIGN KEY </span>
+<span class='line line-10 ' >         (customer_id) REFERENCES customer(id);"</span></code></pre>
+</section>
+<section class='CODE'>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines='2,3,4,5'><span class='line line-1 ' >create_table :orders do |t|</span>
+<div class='lines-callout'><span class='line line-2 line-callout' >  t.belongs_to :customer,   null: false</span>
+<span class='line line-3 line-callout' >  t.string     :name,       null: true</span>
+<span class='line line-4 line-callout' >  t.integer    :order_type, null: false</span>
+<span class='line line-5 line-callout' >  t.date       :shipped_on, null: true</span>
+</div><span class='line line-6 ' >  t.timestamps</span>
+<span class='line line-7 ' >end</span>
+<span class='line line-8 ' >execute "ALTER table things </span>
+<span class='line line-9 ' >         ADD FOREIGN KEY </span>
+<span class='line line-10 ' >         (customer_id) REFERENCES customer(id);"</span></code></pre>
+</section>
+<section class='CODE'>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines='8,9,10'><span class='line line-1 ' >create_table :orders do |t|</span>
+<span class='line line-2 ' >  t.belongs_to :customer,   null: false</span>
+<span class='line line-3 ' >  t.string     :name,       null: true</span>
+<span class='line line-4 ' >  t.integer    :order_type, null: false</span>
+<span class='line line-5 ' >  t.date       :shipped_on, null: true</span>
+<span class='line line-6 ' >  t.timestamps</span>
+<span class='line line-7 ' >end</span>
+<div class='lines-callout'><span class='line line-8 line-callout' >execute "ALTER table things </span>
+<span class='line line-9 line-callout' >         ADD FOREIGN KEY </span>
+<span class='line line-10 line-callout' >         (customer_id) REFERENCES customer(id);"</span></div></code></pre>
 </section>
 <section class='BULLETS'>
-<h1>Better</h1>
+<h1>Use the Database</h1>
 <ul>
-<li>Controller is clearer</li>
-<li><tt>PurchaseSearchService</tt> interface can be replaced</li>
-<li>Same code</li>
-<li>Probably easier to test</li>
+<li>Explicit nullability</li>
+<li>Foreign keys</li>
+<li>Check constraints (if DB supports)</li>
+</ul>
+</section>
+<section class='NUMSECTION'>
+<h1>3</h1>
+<h2>Better-Factored Code</h2>
+</section>
+<section class='NORMAL'>
+<h1>Not demonstrating Rails' features</h1>
+</section>
+<section class='NORMAL'>
+<h1>Deliver value…</h1>
+<h2>…through software…</h2>
+<h3>…using Rails</h3>
+</section>
+<section class='BULLETS'>
+<h1>Two steps to better-factored code</h1>
+<ul>
+<li>Not everything is an ActiveRecord object</li>
+<li>Not all code belongs on a model</li>
+</ul>
+</section>
+<section class='NUMSECTION'>
+<h1>3.1</h1>
+<h2>Not everything is an ActiveRecord object</h2>
+</section>
+<section class='CODE'>
+<pre><code class='erb' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >&lt;h1&gt;Purchase &lt;%= @purchase.id %&gt;&lt;/h1&gt;</span>
+<span class='line line-2 ' >&lt;h2&gt;for &lt;%= @purchase.customer.name %&gt;&lt;/h2&gt;</span>
+<span class='line line-3 ' >&lt;dl&gt;</span>
+<span class='line line-4 ' >  &lt;dt&gt;Item&lt;/dt&gt;</span>
+<span class='line line-5 ' >  &lt;dd&gt;&lt;%= @purchase.item.description %&gt;&lt;/dd&gt;</span>
+<span class='line line-6 ' >  &lt;dt&gt;Price&lt;/dt&gt;</span>
+<span class='line line-7 ' >  &lt;dd&gt;&lt;%= @purchase.price %&gt;&lt;/dd&gt;</span>
+<span class='line line-8 ' >&lt;/dl&gt;</span></code></pre>
+</section>
+<section class='BULLETS'>
+<h1>Bad</h1>
+<ul>
+<li>Changes to purchase, customer, and item all cause this to change</li>
+<li>If data comes from API call, this gets messy</li>
 </ul>
 </section>
 <section class='CODE'>
@@ -303,143 +263,160 @@
 <span class='line line-2 ' >  def initialize(purchase)</span>
 <span class='line line-3 ' >    @purchase = purchase</span>
 <span class='line line-4 ' >    @customer = purchase.customer</span>
-<span class='line line-5 ' >  end</span>
-<span class='line line-6 ' ></span>
-<span class='line line-7 ' >  def customer_name</span>
-<span class='line line-8 ' >    @customer.name</span>
-<span class='line line-9 ' >  end</span>
-<span class='line line-10 ' ></span>
-<span class='line line-11 ' >  def purchase_price</span>
-<span class='line line-12 ' >    @purchase.price || 0</span>
-<span class='line line-13 ' >  end</span>
-<span class='line line-14 ' ></span>
-<span class='line line-15 ' >  # etc.</span>
-<span class='line line-16 ' >end</span></code></pre>
-</section>
-<section class='CODE'>
-<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class PurchasePresenter</span>
-<span class='line line-2 ' >  attr_reader :customer_name,</span>
-<span class='line line-3 ' >              :purchase_price</span>
-<span class='line line-4 ' ></span>
-<span class='line line-5 ' >  def initialize(attribtues)</span>
-<span class='line line-6 ' >    @customer_name = attributes[:customer_name]</span>
-<span class='line line-7 ' >    @purchase_price = attributes[:purchase_price]</span>
-<span class='line line-8 ' >    # etc., or use some reflection</span>
-<span class='line line-9 ' >  end</span>
-<span class='line line-10 ' ></span>
-<span class='line line-11 ' >  def self.from_purchase(purchase)</span>
-<span class='line line-12 ' >    self.new(customer_name: purchase.customer.name,</span>
-<span class='line line-13 ' >            purchase_price: purchase_price.price || 0)</span>
-<span class='line line-14 ' >  end</span>
-<span class='line line-15 ' >end</span></code></pre>
-</section>
-<section class='BULLETS'>
-<h1>Better</h1>
-<ul>
-<li><tt>PurchasePresenter</tt>'s <em>interface</em> is decoupled from where the values come from - it's just a dumb struct</li>
-<li>It can be replaced</li>
-<li>It can be constructed another way, e.g. a series of API calls</li>
-<li>Same effort to implement</li>
-</ul>
-</section>
-<section class='CODE'>
-<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class MySnazzyService</span>
-<span class='line line-2 ' >  def doit_now_i_am_here(predator)</span>
-<span class='line line-3 ' >    result = bunch_of_complex_logic(predator)</span>
-<span class='line line-4 ' >    CIAMailer.team_lost(result)</span>
-<span class='line line-5 ' >  end</span>
-<span class='line line-6 ' >end</span></code></pre>
-</section>
-<section class='CODE'>
-<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class MySnazzyService</span>
-<span class='line line-2 ' >  def doit_now_i_am_here(predator)</span>
-<span class='line line-3 ' >    result = bunch_of_complex_logic(predator)</span>
-<span class='line line-4 ' >    CIAMailer.team_lost(result).deliver # OOPS</span>
-<span class='line line-5 ' >  end</span>
-<span class='line line-6 ' >end</span></code></pre>
-</section>
-<section class='CODE'>
-<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class MySnazzyService</span>
-<span class='line line-2 ' >  def doit_now_i_am_here(predator)</span>
-<span class='line line-3 ' >    result = bunch_of_complex_logic(predator)</span>
-<span class='line line-4 ' >    Email.send(:team_lost,result)</span>
-<span class='line line-5 ' >  end</span>
-<span class='line line-6 ' >end</span>
+<span class='line line-5 ' >    @item     = purchase.item</span>
+<span class='line line-6 ' >  end</span>
 <span class='line line-7 ' ></span>
-<span class='line line-8 ' >class Email</span>
-<span class='line line-9 ' >  def self.send(email,*args)</span>
-<span class='line line-10 ' >    CIAMailer.send(email,args)</span>
-<span class='line line-11 ' >  end</span>
+<span class='line line-8 ' >  def customer_name;    @customer.name;    end</span>
+<span class='line line-9 ' >  def purchase_price;   @purchase.price;   end</span>
+<span class='line line-10 ' >  def purchase_id;      @purchase.id;      end</span>
+<span class='line line-11 ' >  def item_description; @item.description; end</span>
 <span class='line line-12 ' >end</span></code></pre>
 </section>
-<section class='BULLETS'>
-<h1>Better</h1>
-<ul>
-<li><tt>Email</tt> can...</li>
-<li>...<strong>Be replaced!</strong></li>
-</ul>
+<section class='NORMAL'>
+<h1>Just kicking the can down the road</h1>
+</section>
+<section class='NORMAL'>
+<h1>Decorators, Delgators, Exhibits?</h1>
+</section>
+<section class='NORMAL'>
+<h1>STILL just kicking the can…</h1>
+<h2>…but hampering readability</h2>
 </section>
 <section class='CODE'>
-<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class Email</span>
-<span class='line line-2 ' >  def self.send(email,*args)</span>
-<span class='line line-3 ' >    CIAMailer.send(email,args)</span>
-<span class='line line-4 ' >  end</span>
-<span class='line line-5 ' >end</span></code></pre>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class PurchaseRecord</span>
+<span class='line line-2 ' >  extend  ActiveModel::Naming</span>
+<span class='line line-3 ' >  include ActiveModel::Conversion</span>
+<span class='line line-4 ' ></span>
+<span class='line line-5 ' >  def persisted?; true; end</span>
+<span class='line line-6 ' ></span>
+<span class='line line-7 ' >  attr_reader :customer_name,</span>
+<span class='line line-8 ' >              :purchase_price,</span>
+<span class='line line-9 ' >              :purchase_id,</span>
+<span class='line line-10 ' >              :item_description</span>
+<span class='line line-11 ' ></span>
+<span class='line line-12 ' >  def initialize(attribtues={})</span>
+<span class='line line-13 ' >    @customer_name    = attributes[:customer_name]</span>
+<span class='line line-14 ' >    @purchase_price   = attributes[:purchase_price]</span>
+<span class='line line-15 ' >    @purchase_id      = attributes[:purchase_id]</span>
+<span class='line line-16 ' >    @item_description = attributes[:item_description]</span>
+<span class='line line-17 ' >  end</span>
+<span class='line line-18 ' >end</span></code></pre>
 </section>
 <section class='CODE'>
-<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class Email</span>
-<span class='line line-2 ' >  def self.send(email,*args)</span>
-<span class='line line-3 ' >    queue(:email, ->() {</span>
-<span class='line line-4 ' >      CIAMailer.send(email,args)</span>
-<span class='line line-5 ' >    }</span>
-<span class='line line-6 ' >  end</span>
-<span class='line line-7 ' >end</span></code></pre>
-</section>
-<section class='SECTION'>
-<h1>Sensing a theme?</h1>
-</section>
-<section class='SECTION'>
-<h1>Step 3 - Use Your Database</h1>
-</section>
-<section class='CODE'>
-<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >def up</span>
-<span class='line line-2 ' >  create_table :things do |t|</span>
-<span class='line line-3 ' >    t.belongs_to :customer</span>
-<span class='line line-4 ' >    t.string     :name</span>
-<span class='line line-5 ' >    t.integer    :thing_type</span>
-<span class='line line-6 ' >    t.timestamps</span>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class PurchaseRecord</span>
+<span class='line line-2 ' >  def self.from_purchase(purchase)</span>
+<span class='line line-3 ' >    self.new(customer_name: purchase.customer.name,</span>
+<span class='line line-4 ' >            purchase_price: purchase.price,</span>
+<span class='line line-5 ' >               purchase_id: purchase.id,</span>
+<span class='line line-6 ' >          item_description: purchase.item.description)</span>
 <span class='line line-7 ' >  end</span>
 <span class='line line-8 ' >end</span></code></pre>
 </section>
 <section class='BULLETS'>
-<h1>Who needs data integrity?</h1>
+<h1>Better</h1>
 <ul>
-<li>nullable by default</li>
-<li>no foreign keys</li>
-<li>no indexes</li>
+<li>View treats as dumb struct</li>
+<li>Other code treats as dumb struct</li>
+<li>Construction localized to one method</li>
+<li>Can be replaced by <code>OpenStruct</code></li>
 </ul>
 </section>
+<section class='BULLETS'>
+<h1>This is also just better code</h1>
+<ul>
+<li>Named for what it is, not what it does</li>
+<li>Rails treats it as a model for form helpers</li>
+<li>Same effort to implement</li>
+<li>Clearer tests</li>
+</ul>
+</section>
+<section class='NUMSECTION'>
+<h1>3.2</h1>
+<h2>Not All Code Belongs to a Model</h2>
+</section>
+<section class='BULLETS'>
+<h1>How Stitch Fix processes returns</h1>
+<ul>
+<li>Shipment is marked as received</li>
+<li>Check if user has paid for kept items</li>
+<li>Check if unpaid items were returned</li>
+<li>Record status of each item - sold, recieved, damanged</li>
+<li>Charge customer if they haven't paid</li>
+<li>Email customer service any outliers</li>
+</ul>
+</section>
+<section class='BULLETS'>
+<h1>What model does this go with?</h1>
+<ul>
+<li><code>Return</code>? Why would it know about charging customers?</li>
+<li><code>Shipment</code>? Why would it know emailing customer service?</li>
+<li>A series of observers, hooks, callbacks and delegators?</li>
+</ul>
+</section>
+<section class='NORMAL'>
+<h1>KISS</h1>
+</section>
+<section class='NORMAL'>
+<h1>Keep It Simple</h1>
+<h2>(Stupid)</h2>
+</section>
+<section class='NORMAL'>
+<h1>Consider Service Objects</h1>
+</section>
 <section class='CODE'>
-<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >def up</span>
-<span class='line line-2 ' >  create_table :things do |t|</span>
-<span class='line line-3 ' >    t.belongs_to :customer,   null: false</span>
-<span class='line line-4 ' >    t.string     :name,       null: true</span>
-<span class='line line-5 ' >    t.integer    :thing_type, null: false</span>
-<span class='line line-6 ' >    t.timestamps</span>
-<span class='line line-7 ' >  end</span>
-<span class='line line-8 ' >  add_index :things, [:thing_type]</span>
-<span class='line line-9 ' >  execute "ALTER table things </span>
-<span class='line line-10 ' >           ADD FOREIGN KEY </span>
-<span class='line line-11 ' >           (customer_id) REFERENCES customer(id);"</span>
-<span class='line line-12 ' >end</span></code></pre>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class ReturnProcessor</span>
+<span class='line line-2 ' >  def self.process!(the_return,logged_in_user)</span>
+<span class='line line-3 ' >    # All that crazy logic</span>
+<span class='line line-4 ' >  end</span>
+<span class='line line-5 ' >end</span></code></pre>
 </section>
 <section class='BULLETS'>
 <h1>Better</h1>
 <ul>
-<li><tt>null: true</tt> shows intent, not forgetfulness</li>
-<li>index what you'll query on</li>
-<li>foreign keys keep data safe from prying shell scripts</li>
+<li>Single-purpose class, based on business logic</li>
+<li>One location where code lives</li>
+<li>One location for the tests</li>
+<li>Can be swapped out with few changes to code</li>
 </ul>
+</section>
+<section class='NORMAL'>
+<h1>This isn't YAGNI,</h1>
+<h2>it's a design decision.</h2>
+</section>
+<section class='NORMAL'>
+<h1>Remember, you aren't demonstrating features of Rails (or Ruby)</h1>
+</section>
+<section class='SECTION'>
+<h1>When the MonoRail approaches</h1>
+</section>
+<section class='BULLETS'>
+<h1>When the MonoRail approaches</h1>
+<ul>
+<li>Provising + Deploy</li>
+<li>Use the database</li>
+<li>Well-factored code</li>
+</ul>
+</section>
+<section class='BULLETS'>
+<h1>New/Split applications</h1>
+<ul>
+<li>Provision + Deploy in one step</li>
+<li>Share business logic via gems</li>
+<li>Shared data access protected by constraints</li>
+</ul>
+</section>
+<section class='BULLETS'>
+<h1>Service Extraction</h1>
+<ul>
+<li>Provision + Deploy in one step</li>
+<li>Move service layer to new app</li>
+<li>Replace service layer with API calls</li>
+</ul>
+</section>
+<section class='SECTION'>
+<h1>The End</h1>
+<h2>@davetron5000</h2>
+<h3>http://www.naildrivin5.com</h3>
 </section>
 
   </div></body>

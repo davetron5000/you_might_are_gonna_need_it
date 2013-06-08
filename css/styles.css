@@ -6,21 +6,39 @@
  * You shouldn't do too much custom sizing here, as it may
  * mess up the automatic sizing algorithm.
  */
+html {
+  min-height: 100%; }
+
 section.TITLE, section.SECTION, section.IMAGE, section.NORMAL {
   text-align: center; }
+
+section.NUMSECTION {
+  text-align: center; }
+  section.NUMSECTION h1 {
+    text-align: right; }
+  section.NUMSECTION h1:after {
+    content: "▐"; }
+
+a {
+  text-decoration: none;
+  color: #111111; }
+
+body, li, p, h1, h2, h3, h4, h5, h6, dd, dt {
+  color: #111111; }
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2em; }
 
 section.QUOTE {
   text-align: center; }
   section.QUOTE blockquote {
-    font-style: italic;
-    color: #666; }
+    color: #111111; }
   section.QUOTE blockquote:before {
     content: "“";
-    font-size: 500%;
-    color: #000; }
+    font-size: 500%; }
 
 body.QUOTE {
-  background: #9ed7d1; }
+  background-color: #c4e8ff; }
 
 body.COMMANDLINE {
   background: black; }
@@ -29,10 +47,16 @@ body.CODE {
   background: #eee8d5; }
 
 body.BULLETS {
-  background: #9ed7d1; }
+  background-color: #9eb2bf; }
 
-body.TITLE, body.SECTION {
-  background: #f2e230; }
+body.NORMAL {
+  background-color: #c4e8ff; }
+
+body.TITLE, body.SECTION, body.NUMSECTION {
+  background-color: #ffe3c0; }
+
+body.IMAGE {
+  background: #ffe3c0; }
 
 section.BULLETS {
   margin-left: 64px; }
@@ -57,11 +81,16 @@ section.CODE code {
   */
   border-bottom-right-radius: 0.5em;
   border-bottom-left-radius: 0.5em;
-  box-shadow: 0 0.3em 0.2em -0.2em #ddd7c4; }
+  box-shadow: 0 0.3em 0.2em -0.2em #ddd7c4;
+  font-family: 'courier', monospace; }
 
 h1, h2, h3, h4 {
   margin: 0;
-  font-family: Helvetica, Arial; }
+  font-family: "Quicksand"; }
+  h1 strong, h2 strong, h3 strong, h4 strong {
+    font-family: "Quicksand"; }
+  h1 em, h2 em, h3 em, h4 em {
+    font-family: "Quicksand"; }
 
 h2 {
   font-size: 90%; }
@@ -70,7 +99,7 @@ h3 {
   font-size: 80%; }
 
 p, li {
-  font-family: Helvetica, Arial; }
+  font-family: "Didot"; }
 
 li {
   list-style: disc;
@@ -78,3 +107,7 @@ li {
   margin-left: 1em;
   margin-right: 1em;
   line-height: 2em; }
+
+blockquote {
+  font-family: "Didot";
+  line-height: 1em; }

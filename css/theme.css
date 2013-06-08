@@ -1,227 +1,137 @@
-pre ::-moz-selection {
-  background: #333333;
-  color: white;
-  text-shadow: none; }
-
-pre ::selection {
-  background: #333333;
-  color: white;
-  text-shadow: none; }
+/*
+Monokai style - ported by Luigi Maselli - http://grigio.org
+*/
 
 pre code {
-  display: block;
-  padding: 0.5em;
-  background: #2d2c2d;
-  color: #dddddd; }
+  display: block; padding: 0.5em;
+  background: #272822;
+}
 
-pre .body,
-pre .collection {
-  color: #dddddd; }
+pre .tag,
+pre .tag .title,
+pre .keyword,
+pre .literal,
+pre .change,
+pre .winutils,
+pre .flow,
+pre .lisp .title,
+pre .clojure .built_in,
+pre .nginx .title,
+pre .tex .special {
+  color: #F92672;
+}
 
-pre .comment {
-  color: #efefef;
-  font-style: italic; }
+pre code {
+  color: #DDD;
+}
 
-pre .template_comment {
-  color: #efefef;
-  font-style: italic; }
-
-pre .diff .header {
-  color: #efefef;
-  font-style: italic; }
-
-pre .doctype {
-  color: #efefef;
-  font-style: italic; }
-
-pre .lisp .string {
-  color: #efefef;
-  font-style: italic; }
-
-pre .javadoc {
-  color: #efefef;
-  font-style: italic; }
-
-pre .keyword {
-  color: #9ed7d1; }
-
-pre .clojure .attribute {
-  color: #9ed7d1; }
-
-pre .winutils {
-  color: #9ed7d1; }
-
-pre .javascript .title {
-  color: #9ed7d1; }
-
-pre .addition {
-  color: #9ed7d1; }
-
-pre .css .tag {
-  color: #9ed7d1; }
-
-pre .number {
-  color: #f2e230; }
-
-pre .command {
-  color: #bf3030; }
-
-pre .string {
-  color: #bf3030; }
-
-pre .tag .value {
-  color: #bf3030; }
-
-pre .phpdoc {
-  color: #bf3030; }
-
-pre .tex .formula {
-  color: #eee8d5; }
-
-pre .regexp {
-  color: #bf3030; }
-
-pre .hexcolor {
-  color: #bf3030; }
-
-pre .title {
-  color: #bf3030; }
-
-pre .localvars {
-  color: #bf3030; }
-
-pre .function .title {
-  color: #bf3030; }
-
-pre .chunk {
-  color: #bf3030; }
-
-pre .decorator {
-  color: #bf3030; }
-
-pre .built_in {
-  color: #bf3030; }
-
-pre .lisp .title {
-  color: #f2e230; }
-
-pre .identifier {
-  color: #bf3030; }
-
-pre .class .keyword {
-  color: #f2e230; }
-
-pre .variable {
-  color: #f2e230; }
-
-pre .lisp .body {
-  color: #f2e230; }
-
-pre .smalltalk .number {
-  color: #f2e230; }
-
-pre .constant {
-  color: #f2e230; }
+pre code .constant {
+	color: #66D9EF;
+}
 
 pre .class .title {
-  color: #f2e230; }
+	color: white;
+}
 
-pre .parent {
-  color: #f2e230; }
+pre .attribute,
+pre .symbol,
+pre .symbol .string,
+pre .value,
+pre .regexp {
+	color: #BF79DB;
+}
 
-pre .haskell .label {
-  color: #f2e230; }
+pre .tag .value,
+pre .string,
+pre .ruby .subst,
+pre .title,
+pre .haskell .type,
+pre .preprocessor,
+pre .ruby .class .parent,
+pre .built_in,
+pre .sql .aggregate,
+pre .django .template_tag,
+pre .django .variable,
+pre .smalltalk .class,
+pre .javadoc,
+pre .django .filter .argument,
+pre .smalltalk .localvars,
+pre .smalltalk .array,
+pre .attr_selector,
+pre .pseudo,
+pre .addition,
+pre .stream,
+pre .envvar,
+pre .apache .tag,
+pre .apache .cbracket,
+pre .tex .command,
+pre .input_number {
+  color: #A6E22E;
+}
 
-pre .id {
-  color: #f2e230; }
-
-pre .lisp .title {
-  color: #f2e230; }
-
-pre .clojure .title .built_in {
-  color: #f2e230; }
-
-pre .tag .title,
-pre .rules .property,
-pre .django .tag .keyword,
-pre .clojure .title .built_in {
-  font-weight: bold; }
-
-pre .attribute {
-  color: #efefef; }
-
-pre .clojure .title {
-  color: #efefef; }
-
-pre .preprocessor {
-  color: #9ed7d1; }
-
-pre .pi {
-  color: #9ed7d1; }
-
-pre .shebang {
-  color: #9ed7d1; }
-
-pre .symbol {
-  color: #9ed7d1; }
-
-pre .symbol .string {
-  color: #9ed7d1; }
-
-pre .diff .change {
-  color: #9ed7d1; }
-
-pre .special {
-  color: #9ed7d1; }
-
-pre .attr_selector {
-  color: #9ed7d1; }
-
-pre .important {
-  color: #9ed7d1; }
-
-pre .subst {
-  color: #9ed7d1; }
-
-pre .cdata {
-  color: #9ed7d1; }
-
-pre .deletion {
-  color: #dc322f; }
-
+pre .comment,
+pre .java .annotation,
+pre .python .decorator,
+pre .template_comment,
+pre .pi,
+pre .doctype,
+pre .deletion,
+pre .shebang,
+pre .apache .sqbracket,
 pre .tex .formula {
-  background: #eee8d5; }
+  color: #75715E;
+}
 
+pre .keyword,
+pre .literal,
+pre .css .id,
+pre .phpdoc,
+pre .title,
+pre .haskell .type,
+pre .vbscript .built_in,
+pre .sql .aggregate,
+pre .rsl .built_in,
+pre .smalltalk .class,
+pre .diff .header,
+pre .chunk,
+pre .winutils,
+pre .bash .variable,
+pre .apache .tag,
+pre .tex .special,
+pre .request,
+pre .status {
+  font-weight: bold;
+}
+
+pre .coffeescript .javascript,
+pre .xml .css,
+pre .xml .javascript,
+pre .xml .vbscript,
+pre .tex .formula {
+  opacity: 0.5;
+}
 pre {
-  counter-reset: lines; }
-
+  counter-reset: lines;
+}
 pre .line {
-  counter-increment: lines; }
-
+  counter-increment: lines;
+}
 pre .line::before {
-  content: counter(lines);
-  text-align: right;
-  display: inline-block;
-  width: 2em;
-  padding-right: 0.5em;
-  margin-right: 0.5em;
-  color: #464547; }
+  content: counter(lines); text-align: right;
+  display: inline-block; width: 2em;
+  padding-right: 0.5em; margin-right: 0.5em;
+  color: #eee8d5;
+}
 
 pre .line-callout::before {
-  content: '\2192';
-  text-align: right;
-  display: inline-block;
-  width: 2em;
-  padding-right: 0.5em;
-  margin-right: 0.5em;
-  color: #f2e230; }
+  //content: '\2192'; text-align: right;
+  content: '>'; text-align: right;
+  display: inline-block; width: 2em;
+  padding-right: 0.5em; margin-right: 0.5em;
+  color: #fff;
+}
 
 .lines-callout {
   border-radius: 0.25em;
-  padding-top: 0.15em;
-  padding-bottom: 0.15em; }
-
-.lines-callout {
-  padding-top: 0.1em;
-  padding-bottom: 0.1em;
-  background: #464547; }
+  background: #494a44;
+}

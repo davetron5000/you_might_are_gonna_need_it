@@ -6,33 +6,69 @@
  * You shouldn't do too much custom sizing here, as it may
  * mess up the automatic sizing algorithm.
  */
-$green:#9ed7d1;
-$yellow:#f2e230;
-$dark-grey:#464547;                                                                                                                          
-$medium-grey:#bebfc1;                                                                                                                        
-$light-grey:#efefef;
-$red:#bf3030;                                                                                   
-$border-color:darken($light-grey, 1.618); 
+$green:#c4e8ff;
+$yellow:#FFE3C0;
+$dark-grey:#c4e8ff;
+$medium-grey:#FFE3C0;
+$light-grey:#888;
+$red:#9EB2BF;
+$text-color: #111;
+$title-font:        "Quicksand";
+$title-font-strong: "Quicksand";
+$title-font-em:     "Quicksand";
+$bullet-font:       "Didot";
+$quote-font:        "Didot";
 
+@mixin gradient($from, $to) {
+  background-color: $from;
+//  background-image: -moz-linear-gradient($from, $to);
+//  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($from), to($to));
+//  background-image: -webkit-linear-gradient($from, $to);
+//  background-image: -o-linear-gradient($from, $to);
+}
+
+html {
+  min-height: 100%;
+}
 section.TITLE, section.SECTION, section.IMAGE, section.NORMAL {
   text-align: center;
+}
+
+section.NUMSECTION {
+  text-align: center;
+  h1 {
+    text-align: right;
+  }
+  h1:after {
+    content: "▐";
+  }
+}
+a {
+  text-decoration: none;
+  color: $text-color;
+}
+
+body, li, p, h1, h2, h3, h4, h5, h6, dd, dt { 
+  color: $text-color;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2em;
 }
 
 section.QUOTE {
   text-align: center;
   blockquote {
-    font-style: italic;
-    color: #666;
+    color: $text-color;
   }
   blockquote:before {
     content: "“";
     font-size: 500%;
-    color: #000;
   }
 }
 
 body.QUOTE {
-  background: $green;
+  @include gradient($green,darken($green,20%));
 }
 body.COMMANDLINE {
   background: black;
@@ -43,9 +79,16 @@ body.CODE {
 }
 
 body.BULLETS {
-  background: $green;
+  @include gradient($red,lighten($red,20%));
 }
-body.TITLE, body.SECTION {
+body.NORMAL {
+  @include gradient($green,darken($green,20%));
+}
+body.TITLE, body.SECTION, body.NUMSECTION {
+  @include gradient($yellow,lighten($yellow,20%));
+}
+
+body.IMAGE {
   background: $yellow;
 }
 
@@ -76,11 +119,19 @@ section.CODE code {
   border-bottom-right-radius: 0.5em;
   border-bottom-left-radius: 0.5em;
   box-shadow: 0 0.3em 0.2em -0.2em #ddd7c4;
+  font-family: 'courier', monospace;
 }
 h1, h2, h3, h4 {
   margin: 0;
-  font-family: Helvetica, Arial;
+  font-family: $title-font;
+  strong {
+    font-family: $title-font-strong;
+  }
+  em {
+    font-family: $title-font-em;
+  }
 }
+
 h2 {
   font-size: 90%;
 }
@@ -88,7 +139,7 @@ h3 {
   font-size: 80%;
 }
 p, li {
-  font-family: Helvetica, Arial;
+  font-family: $bullet-font;
 }
 
 li {
@@ -98,3 +149,9 @@ li {
   margin-right: 1em;
   line-height: 2em;
 }
+
+blockquote {
+  font-family: $quote-font;
+  line-height: 1em;
+}
+
