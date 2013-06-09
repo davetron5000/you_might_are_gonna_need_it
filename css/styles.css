@@ -88,9 +88,10 @@ h1, h2, h3, h4 {
   margin: 0;
   font-family: "Quicksand"; }
   h1 strong, h2 strong, h3 strong, h4 strong {
-    font-family: "Quicksand"; }
+    font-weight: bold; }
   h1 em, h2 em, h3 em, h4 em {
-    font-family: "Quicksand"; }
+    font-family: "Quicksand";
+    font-style: italic; }
 
 h2 {
   font-size: 90%; }
@@ -99,7 +100,7 @@ h3 {
   font-size: 80%; }
 
 p, li {
-  font-family: "Didot"; }
+  font-family: "Quicksand"; }
 
 li {
   list-style: disc;
@@ -109,5 +110,5 @@ li {
   line-height: 2em; }
 
 blockquote {
-  font-family: "Didot";
+  font-family: "Quicksand";
   line-height: 1em; }

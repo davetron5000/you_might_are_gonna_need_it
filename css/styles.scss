@@ -16,8 +16,8 @@ $text-color: #111;
 $title-font:        "Quicksand";
 $title-font-strong: "Quicksand";
 $title-font-em:     "Quicksand";
-$bullet-font:       "Didot";
-$quote-font:        "Didot";
+$bullet-font:       "Quicksand";
+$quote-font:        "Quicksand";
 
 @mixin gradient($from, $to) {
   background-color: $from;
@@ -125,10 +125,11 @@ h1, h2, h3, h4 {
   margin: 0;
   font-family: $title-font;
   strong {
-    font-family: $title-font-strong;
+    font-weight: bold;
   }
   em {
     font-family: $title-font-em;
+    font-style: italic;
   }
 }
 

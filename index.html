@@ -26,53 +26,65 @@
     <section class='TITLE'>
 <h1>You might “Are Gonna Need It”</h1>
 <h2>Avoiding the MonoRail</h2>
-<h3>@davetron5000</h3>
-</section>
-<section class='SECTION'>
-<h1>Me</h1>
-</section>
-<section class='NORMAL'>
-<h1>@davetron5000</h1>
-</section>
-<section class='BULLETS'>
-<h1>Lead Engineer @ Stitch Fix</h1>
-<ul>
-<li>One horrible Django App</li>
-<li>Special-purpose Rails Apps</li>
-<li>Gems & Services</li>
-</ul>
-</section>
-<section class='BULLETS'>
-<h1>Former Engineer @ LivingSocial</h1>
-<ul>
-<li>One giant monorail</li>
-<li>Array of payment-related services</li>
-</ul>
+<h3>Dave Copeland / @davetron5000</h3>
 </section>
 <section class='IMAGE'>
-<img src='images/book.png'>
-</section>
-<section class='SECTION'>
-<h1>What's a MonoRail?</h1>
-<h2><img src="images/monorail.jpg"></h2>
+<img src='images/monorail.jpg'>
 </section>
 <section class='BULLETS'>
-<h1>A MonoRail</h1>
+<h1>Bad</h1>
 <ul>
-<li>Monolithic</li>
-<li>Rails app</li>
-<li>Too big, too hard to change over time</li>
+<li>Slow to change</li>
+<li>Increased failures</li>
 </ul>
 </section>
 <section class='NORMAL'>
 <h1>It <strong>will</strong> happen</h1>
 </section>
+<section class='SECTION'>
+<h1>What do I know?</h1>
+</section>
+<section class='NORMAL'>
+<h1>Lead Engineer @ Stitch Fix</h1>
+<h2>We're avoiding a MonoRail</h2>
+</section>
+<section class='IMAGE' data-background='fff'>
+<img src='images/stitch_fix.png'>
+</section>
+<section class='NORMAL'>
+<h1>Former Engineer @ LivingSocial</h1>
+<h2>We killed a MonoRail</h2>
+</section>
+<section class='IMAGE' data-background='fff'>
+<img src='images/living_social.png'>
+</section>
+<section class='NORMAL'>
+<h1>Basic Strategies</h1>
+</section>
+<section class='NORMAL'>
+<h1>Split existing application</h1>
+</section>
+<section class='IMAGE' data-background='fff'>
+<img src='images/split_application.png'>
+</section>
+<section class='NORMAL'>
+<h1>Create new application</h1>
+</section>
+<section class='IMAGE' data-background='fff'>
+<img src='images/new_application.png'>
+</section>
+<section class='NORMAL'>
+<h1>Extract services</h1>
+</section>
+<section class='IMAGE' data-background='fff'>
+<img src='images/service_extraction.png'>
+</section>
 <section class='BULLETS'>
-<h1>Fixing a MonoRail</h1>
+<h1>Consequences</h1>
 <ul>
-<li>Create new applications</li>
-<li>Split applications</li>
-<li>Extract Services</li>
+<li>One database, many apps</li>
+<li>DB queries become HTTP calls</li>
+<li>Records lose “activeness”</li>
 </ul>
 </section>
 <section class='NORMAL'>
@@ -82,68 +94,70 @@
 <h1><a href="http://c2.com/cgi/wiki?YouArentGonnaNeedIt">YAGNI</a></h1>
 <h2><blockquote>Always implement things when you actually need them, never when you just foresee that you need them.</blockquote></h2>
 </section>
-<section class='BULLETS'>
-<h1>YAGNI is <strong>not</strong>:</h1>
-<ul>
-<li>Pooping out code</li>
-<li>A reason for technical debt</li>
-<li>An excuse for not thinking</li>
-</ul>
+<section class='NORMAL'>
+<h1>YAGNI is about <em>features</em></h1>
+<h2>not <em>design decisions</em></h2>
 </section>
 <section class='NORMAL'>
-<h1>Can we prepare ourselves...</h1>
-<h2>...without wasting time/effort now?</h2>
+<h1>What design decisions should we make?</h1>
 </section>
 <section class='BULLETS'>
-<h1>Avoiding the MonoRail in 3 Steps</h1>
+<h1>Design Decisions</h1>
 <ul>
-<li>Make deployment and provisioning easy</li>
-<li>Use your database</li>
+<li>Make provisioning and deployment easy</li>
+<li>Use the database</li>
 <li>Better-factored code</li>
 </ul>
 </section>
 <section class='NUMSECTION'>
 <h1>1</h1>
-<h2>Make Deployment & Provisioning Easy</h2>
+<h2>Make Provisioning & Deployment Easy</h2>
 </section>
-<section class='QUOTE'>
-<h1>Creating a MonoRail in one step</h1>
-<h2><blockquote>Let's just put that new feature it in the app because it's too much of a pain to make a new app</blockquote></h2>
-</section>
-<section class='NORMAL'>
-<h1>Frictionless Provisioning</h1>
-</section>
-<section class='NORMAL'>
-<h1><tt>rails new</tt> for <strong>your</strong> team</h1>
-</section>
-<section class='NORMAL'>
-<h1>Rails App Generator</h1>
-</section>
-<section class='NORMAL'>
-<h1>Provision and Deploy in one step</h1>
+<section class='BULLETS'>
+<h1>Provisioning & Deployment</h1>
+<ul>
+<li>Minimum Deployable Application</li>
+<li>Find a place to deploy</li>
+<li>Deploy in one step</li>
+</ul>
 </section>
 <section class='NORMAL'>
 <h1>Minimum Deployable Application</h1>
 </section>
+<section class='COMMANDLINE'>
+<pre><code class='no-highlight'><span class='cli-prompt'>&gt;</span> <span class='cli-element cli-command cli-line'> rails new your_app</span>
+<span class='cli-prompt'>#</span> <span class='cli-element cli-command cli-line'> Generates a generic rails app</span>
+</code></pre>
+</section>
+<section class='COMMANDLINE'>
+<pre><code class='no-highlight'><span class='cli-prompt'>&gt;</span> <span class='cli-element cli-command cli-line'> rails new your_app --builder=http://dev.yourcompany.com/service_builder.txt</span>
+<span class='cli-prompt'>#</span> <span class='cli-element cli-command cli-line'> Generates an app tailor-made for YOUR team</span>
+</code></pre>
+</section>
+<section class='NORMAL'>
+<h1>Find a place to deploy</h1>
+</section>
 <section class='BULLETS'>
-<h1>Remove gatekeepers</h1>
+<h1>Deploy in one step</h1>
 <ul>
-<li>QA ⇒ Better Tests</li>
-<li>Physical Deployment ⇒ Learn you some scripting</li>
+<li>Capistrano</li>
+<li>git hooks</li>
+<li>script it yourself</li>
 </ul>
 </section>
 <section class='IMAGE'>
 <img src='images/book.png'>
 </section>
-<section class='NORMAL'>
-<h1>Stand-up new services whenever they are needed</h1>
+<section class='BULLETS'>
+<h1>Once deployed</h1>
+<ul>
+<li>Verify configuration</li>
+<li>Re-deploy if needed</li>
+<li><strong>Then</strong> add features</li>
+</ul>
 </section>
-<section class='NORMAL'>
-<h1>Push changes without heavy coordination</h1>
-</section>
-<section class='NORMAL'>
-<h1>Discussions are about what apps to make,</h1>
-<h2>not how to make them.</h2>
+<section class='IMPORTANT'>
+<h1>Enables <strong>everything</strong> you need to do to avoid or fix a MonoRail</h1>
 </section>
 <section class='NORMAL'>
 <h1>If all else fails…</h1>
@@ -303,6 +317,66 @@
 <span class='line line-18 ' >end</span></code></pre>
 </section>
 <section class='CODE'>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines='2,3,5'><span class='line line-1 ' >class PurchaseRecord</span>
+<div class='lines-callout'><span class='line line-2 line-callout' >  extend  ActiveModel::Naming</span>
+<span class='line line-3 line-callout' >  include ActiveModel::Conversion</span>
+</div><span class='line line-4 ' ></span>
+<div class='lines-callout'><span class='line line-5 line-callout' >  def persisted?; true; end</span>
+</div><span class='line line-6 ' ></span>
+<span class='line line-7 ' >  attr_reader :customer_name,</span>
+<span class='line line-8 ' >              :purchase_price,</span>
+<span class='line line-9 ' >              :purchase_id,</span>
+<span class='line line-10 ' >              :item_description</span>
+<span class='line line-11 ' ></span>
+<span class='line line-12 ' >  def initialize(attribtues={})</span>
+<span class='line line-13 ' >    @customer_name    = attributes[:customer_name]</span>
+<span class='line line-14 ' >    @purchase_price   = attributes[:purchase_price]</span>
+<span class='line line-15 ' >    @purchase_id      = attributes[:purchase_id]</span>
+<span class='line line-16 ' >    @item_description = attributes[:item_description]</span>
+<span class='line line-17 ' >  end</span>
+<span class='line line-18 ' >end</span></code></pre>
+</section>
+<section class='CODE'>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines='7,8,9,10'><span class='line line-1 ' >class PurchaseRecord</span>
+<span class='line line-2 ' >  extend  ActiveModel::Naming</span>
+<span class='line line-3 ' >  include ActiveModel::Conversion</span>
+<span class='line line-4 ' ></span>
+<span class='line line-5 ' >  def persisted?; true; end</span>
+<span class='line line-6 ' ></span>
+<div class='lines-callout'><span class='line line-7 line-callout' >  attr_reader :customer_name,</span>
+<span class='line line-8 line-callout' >              :purchase_price,</span>
+<span class='line line-9 line-callout' >              :purchase_id,</span>
+<span class='line line-10 line-callout' >              :item_description</span>
+</div><span class='line line-11 ' ></span>
+<span class='line line-12 ' >  def initialize(attribtues={})</span>
+<span class='line line-13 ' >    @customer_name    = attributes[:customer_name]</span>
+<span class='line line-14 ' >    @purchase_price   = attributes[:purchase_price]</span>
+<span class='line line-15 ' >    @purchase_id      = attributes[:purchase_id]</span>
+<span class='line line-16 ' >    @item_description = attributes[:item_description]</span>
+<span class='line line-17 ' >  end</span>
+<span class='line line-18 ' >end</span></code></pre>
+</section>
+<section class='CODE'>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines='12,13,14,15,16,17'><span class='line line-1 ' >class PurchaseRecord</span>
+<span class='line line-2 ' >  extend  ActiveModel::Naming</span>
+<span class='line line-3 ' >  include ActiveModel::Conversion</span>
+<span class='line line-4 ' ></span>
+<span class='line line-5 ' >  def persisted?; true; end</span>
+<span class='line line-6 ' ></span>
+<span class='line line-7 ' >  attr_reader :customer_name,</span>
+<span class='line line-8 ' >              :purchase_price,</span>
+<span class='line line-9 ' >              :purchase_id,</span>
+<span class='line line-10 ' >              :item_description</span>
+<span class='line line-11 ' ></span>
+<div class='lines-callout'><span class='line line-12 line-callout' >  def initialize(attribtues={})</span>
+<span class='line line-13 line-callout' >    @customer_name    = attributes[:customer_name]</span>
+<span class='line line-14 line-callout' >    @purchase_price   = attributes[:purchase_price]</span>
+<span class='line line-15 line-callout' >    @purchase_id      = attributes[:purchase_id]</span>
+<span class='line line-16 line-callout' >    @item_description = attributes[:item_description]</span>
+<span class='line line-17 line-callout' >  end</span>
+</div><span class='line line-18 ' >end</span></code></pre>
+</section>
+<section class='CODE'>
 <pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class PurchaseRecord</span>
 <span class='line line-2 ' >  def self.from_purchase(purchase)</span>
 <span class='line line-3 ' >    self.new(customer_name: purchase.customer.name,</span>
@@ -315,19 +389,10 @@
 <section class='BULLETS'>
 <h1>Better</h1>
 <ul>
-<li>View treats as dumb struct</li>
-<li>Other code treats as dumb struct</li>
-<li>Construction localized to one method</li>
+<li>View has fewer reasons to change</li>
+<li>Our <em>data structure</em> has fewer reasons to change</li>
+<li>Reasons to change localized to factory method</li>
 <li>Can be replaced by <code>OpenStruct</code></li>
-</ul>
-</section>
-<section class='BULLETS'>
-<h1>This is also just better code</h1>
-<ul>
-<li>Named for what it is, not what it does</li>
-<li>Rails treats it as a model for form helpers</li>
-<li>Same effort to implement</li>
-<li>Clearer tests</li>
 </ul>
 </section>
 <section class='NUMSECTION'>
@@ -350,6 +415,7 @@
 <ul>
 <li><code>Return</code>? Why would it know about charging customers?</li>
 <li><code>Shipment</code>? Why would it know emailing customer service?</li>
+<li><code>Customer</code>? Why would it know about item statusses?</li>
 <li>A series of observers, hooks, callbacks and delegators?</li>
 </ul>
 </section>
@@ -373,10 +439,17 @@
 <section class='BULLETS'>
 <h1>Better</h1>
 <ul>
-<li>Single-purpose class, based on business logic</li>
-<li>One location where code lives</li>
-<li>One location for the tests</li>
-<li>Can be swapped out with few changes to code</li>
+<li>Logic around business process is in one place</li>
+<li>Tests to assert things are working are in one place</li>
+<li>Can be extracted with few code changes</li>
+</ul>
+</section>
+<section class='BULLETS'>
+<h1>Advantages</h1>
+<ul>
+<li>ActiveRecord objects change infrequently and be shared or copied</li>
+<li>Service Objects can be shared in gems</li>
+<li>Extracting REST-like services is straightforward</li>
 </ul>
 </section>
 <section class='NORMAL'>
@@ -387,31 +460,16 @@
 <h1>Remember, you aren't demonstrating features of Rails (or Ruby)</h1>
 </section>
 <section class='SECTION'>
-<h1>When the MonoRail approaches</h1>
+<h1>To Review</h1>
 </section>
-<section class='BULLETS'>
-<h1>When the MonoRail approaches</h1>
-<ul>
-<li>Provising + Deploy</li>
-<li>Use the database</li>
-<li>Well-factored code</li>
-</ul>
+<section class='NORMAL'>
+<h1>Make setting up a new app dead simple</h1>
 </section>
-<section class='BULLETS'>
-<h1>New/Split applications</h1>
-<ul>
-<li>Provision + Deploy in one step</li>
-<li>Share business logic via gems</li>
-<li>Shared data access protected by constraints</li>
-</ul>
+<section class='NORMAL'>
+<h1>Use your database to enforce data integrity</h1>
 </section>
-<section class='BULLETS'>
-<h1>Service Extraction</h1>
-<ul>
-<li>Provision + Deploy in one step</li>
-<li>Move service layer to new app</li>
-<li>Replace service layer with API calls</li>
-</ul>
+<section class='NORMAL'>
+<h1>Use non-active Records and Service Objects to organize your codebase</h1>
 </section>
 <section class='SECTION'>
 <h1>The End</h1>
