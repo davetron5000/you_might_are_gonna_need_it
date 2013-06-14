@@ -16,7 +16,7 @@ Bad
 It <strong>will</strong> happen
 
 !SECTION
-What do I know?
+Two MonoRail Stories
 
 !NORMAL
 Lead Engineer @ Stitch Fix
@@ -71,7 +71,7 @@ YAGNI is about <em>features</em>
 not <em>design decisions</em>
 
 !NORMAL
-What design decisions should we make?
+How do we approach our design decisions?
 
 !BULLETS
 Design Decisions
@@ -94,11 +94,11 @@ Minimum Deployable Application
 
 !COMMANDLINE
 > rails new your_app
-# Generates a generic rails app
+Generates a generic rails app
 
 !COMMANDLINE
 > rails new your_app --builder=http://dev.yourcompany.com/service_builder.txt
-# Generates an app tailor-made for YOUR team
+Generates an app tailor-made for YOUR team
 
 !NORMAL
 Find a place to deploy
@@ -117,9 +117,6 @@ Once deployed
 * Verify configuration
 * Re-deploy if needed
 * <strong>Then</strong> add features
-
-!IMPORTANT
-Enables <strong>everything</strong> you need to do to avoid or fix a MonoRail
 
 !NORMAL
 If all else fails…
@@ -184,11 +181,8 @@ execute "ALTER table things
          ADD FOREIGN KEY 
          (customer_id) REFERENCES customer(id);"
 
-!BULLETS
-Use the Database
-* Explicit nullability
-* Foreign keys
-* Check constraints (if DB supports)
+!NORMAL
+Check constraints
 
 !NUMSECTION
 3
@@ -242,13 +236,6 @@ end
 
 !NORMAL
 Just kicking the can down the road
-
-!NORMAL
-Decorators, Delgators, Exhibits?
-
-!NORMAL
-STILL just kicking the can…
-…but hampering readability
 
 !CODE: language=ruby
 class PurchaseRecord
@@ -332,7 +319,21 @@ end
 
 !CODE: language=ruby
 class PurchaseRecord
+
+
   def self.from_purchase(purchase)
+    self.new(customer_name: purchase.customer.name,
+            purchase_price: purchase.price,
+               purchase_id: purchase.id,
+          item_description: purchase.item.description)
+  end
+end
+
+!CODE: language=ruby
+class PurchaseRecordController
+
+private
+  def from_purchase(purchase)
     self.new(customer_name: purchase.customer.name,
             purchase_price: purchase.price,
                purchase_id: purchase.id,
@@ -355,16 +356,16 @@ Not All Code Belongs to a Model
 How Stitch Fix processes returns
 * Shipment is marked as received
 * Check if user has paid for kept items
+* Charge customer if they haven't paid
 * Check if unpaid items were returned
 * Record status of each item - sold, recieved, damanged
-* Charge customer if they haven't paid
 * Email customer service any outliers
 
 !BULLETS
 What model does this go with?
 * <code>Return</code>? Why would it know about charging customers?
 * <code>Shipment</code>? Why would it know emailing customer service?
-* <code>Customer</code>? Why would it know about item statusses?
+* <code>Customer</code>? Why would it know about item statuses?
 * A series of observers, hooks, callbacks and delegators?
 
 !NORMAL
@@ -398,10 +399,7 @@ Advantages
 
 !NORMAL
 This isn't YAGNI,
-it's a design decision.
-
-!NORMAL
-Remember, you aren't demonstrating features of Rails (or Ruby)
+it's design decisions.
 
 !SECTION
 To Review
@@ -413,9 +411,14 @@ Make setting up a new app dead simple
 Use your database to enforce data integrity
 
 !NORMAL
-Use non-active Records and Service Objects to organize your codebase
+Use structs/plain models & Service Objects to organize your codebase
 
 !SECTION
 The End
 @davetron5000
 http://www.naildrivin5.com
+
+!SECTION
+Come Work for Us
+http://www.stitchfix.com
+http://stitchfixjobs.com

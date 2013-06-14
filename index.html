@@ -42,7 +42,7 @@
 <h1>It <strong>will</strong> happen</h1>
 </section>
 <section class='SECTION'>
-<h1>What do I know?</h1>
+<h1>Two MonoRail Stories</h1>
 </section>
 <section class='NORMAL'>
 <h1>Lead Engineer @ Stitch Fix</h1>
@@ -99,7 +99,7 @@
 <h2>not <em>design decisions</em></h2>
 </section>
 <section class='NORMAL'>
-<h1>What design decisions should we make?</h1>
+<h1>How do we approach our design decisions?</h1>
 </section>
 <section class='BULLETS'>
 <h1>Design Decisions</h1>
@@ -126,12 +126,12 @@
 </section>
 <section class='COMMANDLINE'>
 <pre><code class='no-highlight'><span class='cli-prompt'>&gt;</span> <span class='cli-element cli-command cli-line'> rails new your_app</span>
-<span class='cli-prompt'>#</span> <span class='cli-element cli-command cli-line'> Generates a generic rails app</span>
+<span class='cli-element cli-result'><span class='cli-line'>Generates a generic rails app</span></span>
 </code></pre>
 </section>
 <section class='COMMANDLINE'>
 <pre><code class='no-highlight'><span class='cli-prompt'>&gt;</span> <span class='cli-element cli-command cli-line'> rails new your_app --builder=http://dev.yourcompany.com/service_builder.txt</span>
-<span class='cli-prompt'>#</span> <span class='cli-element cli-command cli-line'> Generates an app tailor-made for YOUR team</span>
+<span class='cli-element cli-result'><span class='cli-line'>Generates an app tailor-made for YOUR team</span></span>
 </code></pre>
 </section>
 <section class='NORMAL'>
@@ -155,9 +155,6 @@
 <li>Re-deploy if needed</li>
 <li><strong>Then</strong> add features</li>
 </ul>
-</section>
-<section class='IMPORTANT'>
-<h1>Enables <strong>everything</strong> you need to do to avoid or fix a MonoRail</h1>
 </section>
 <section class='NORMAL'>
 <h1>If all else fails…</h1>
@@ -224,13 +221,8 @@
 <span class='line line-9 line-callout' >         ADD FOREIGN KEY </span>
 <span class='line line-10 line-callout' >         (customer_id) REFERENCES customer(id);"</span></div></code></pre>
 </section>
-<section class='BULLETS'>
-<h1>Use the Database</h1>
-<ul>
-<li>Explicit nullability</li>
-<li>Foreign keys</li>
-<li>Check constraints (if DB supports)</li>
-</ul>
+<section class='NORMAL'>
+<h1>Check constraints</h1>
 </section>
 <section class='NUMSECTION'>
 <h1>3</h1>
@@ -288,13 +280,6 @@
 </section>
 <section class='NORMAL'>
 <h1>Just kicking the can down the road</h1>
-</section>
-<section class='NORMAL'>
-<h1>Decorators, Delgators, Exhibits?</h1>
-</section>
-<section class='NORMAL'>
-<h1>STILL just kicking the can…</h1>
-<h2>…but hampering readability</h2>
 </section>
 <section class='CODE'>
 <pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class PurchaseRecord</span>
@@ -378,13 +363,27 @@
 </section>
 <section class='CODE'>
 <pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class PurchaseRecord</span>
-<span class='line line-2 ' >  def self.from_purchase(purchase)</span>
-<span class='line line-3 ' >    self.new(customer_name: purchase.customer.name,</span>
-<span class='line line-4 ' >            purchase_price: purchase.price,</span>
-<span class='line line-5 ' >               purchase_id: purchase.id,</span>
-<span class='line line-6 ' >          item_description: purchase.item.description)</span>
-<span class='line line-7 ' >  end</span>
-<span class='line line-8 ' >end</span></code></pre>
+<span class='line line-2 ' ></span>
+<span class='line line-3 ' ></span>
+<span class='line line-4 ' >  def self.from_purchase(purchase)</span>
+<span class='line line-5 ' >    self.new(customer_name: purchase.customer.name,</span>
+<span class='line line-6 ' >            purchase_price: purchase.price,</span>
+<span class='line line-7 ' >               purchase_id: purchase.id,</span>
+<span class='line line-8 ' >          item_description: purchase.item.description)</span>
+<span class='line line-9 ' >  end</span>
+<span class='line line-10 ' >end</span></code></pre>
+</section>
+<section class='CODE'>
+<pre><code class='ruby' data-strikeouts='' data-callout-lines=''><span class='line line-1 ' >class PurchaseRecordController</span>
+<span class='line line-2 ' ></span>
+<span class='line line-3 ' >private</span>
+<span class='line line-4 ' >  def from_purchase(purchase)</span>
+<span class='line line-5 ' >    self.new(customer_name: purchase.customer.name,</span>
+<span class='line line-6 ' >            purchase_price: purchase.price,</span>
+<span class='line line-7 ' >               purchase_id: purchase.id,</span>
+<span class='line line-8 ' >          item_description: purchase.item.description)</span>
+<span class='line line-9 ' >  end</span>
+<span class='line line-10 ' >end</span></code></pre>
 </section>
 <section class='BULLETS'>
 <h1>Better</h1>
@@ -404,9 +403,9 @@
 <ul>
 <li>Shipment is marked as received</li>
 <li>Check if user has paid for kept items</li>
+<li>Charge customer if they haven't paid</li>
 <li>Check if unpaid items were returned</li>
 <li>Record status of each item - sold, recieved, damanged</li>
-<li>Charge customer if they haven't paid</li>
 <li>Email customer service any outliers</li>
 </ul>
 </section>
@@ -415,7 +414,7 @@
 <ul>
 <li><code>Return</code>? Why would it know about charging customers?</li>
 <li><code>Shipment</code>? Why would it know emailing customer service?</li>
-<li><code>Customer</code>? Why would it know about item statusses?</li>
+<li><code>Customer</code>? Why would it know about item statuses?</li>
 <li>A series of observers, hooks, callbacks and delegators?</li>
 </ul>
 </section>
@@ -454,10 +453,7 @@
 </section>
 <section class='NORMAL'>
 <h1>This isn't YAGNI,</h1>
-<h2>it's a design decision.</h2>
-</section>
-<section class='NORMAL'>
-<h1>Remember, you aren't demonstrating features of Rails (or Ruby)</h1>
+<h2>it's design decisions.</h2>
 </section>
 <section class='SECTION'>
 <h1>To Review</h1>
@@ -469,12 +465,17 @@
 <h1>Use your database to enforce data integrity</h1>
 </section>
 <section class='NORMAL'>
-<h1>Use non-active Records and Service Objects to organize your codebase</h1>
+<h1>Use structs/plain models & Service Objects to organize your codebase</h1>
 </section>
 <section class='SECTION'>
 <h1>The End</h1>
 <h2>@davetron5000</h2>
 <h3>http://www.naildrivin5.com</h3>
+</section>
+<section class='SECTION'>
+<h1>Come Work for Us</h1>
+<h2>http://www.stitchfix.com</h2>
+<h3>http://stitchfixjobs.com</h3>
 </section>
 
   </div></body>
