@@ -10,16 +10,26 @@ var TricksterDefaultConfig = {
                     39,  // right arrow
                     34,  // Kensington presenter right arrow
                     32], // space bar
+  advanceSwipe: "left",
   /** Keycodes that go back to the previous slide */
   backKeycodes:    [75,  // k
                     37,  // left arrow
                     33,  // Kensington presenter left arrow
                     8],  // delete
-  startOverKeycodes: [66], // Kensington presenter down/stop
+  backSwipe: "right",
+  startOverKeycodes: [], // not really needed since you can just refresh the browser window
+  startTimerKeycodes: [66, // Kensington presenter down/stop aka "b"
+                       80  // p
+                      ],
+  pauseTimerKeycodes: [65  // a
+                      ],
   /** These keycodes, if encountered, will not be sent along
       to the browser.  Useful if there might be some vertical
       scrolling and 32/33/34 would otherwise scroll */
-  keyCodesPreventingDefault: [ 34, 32, 33 ]
+  keyCodesPreventingDefault: [ 34, 32, 33 ],
+  lengthMinutes: 60,  // how much time you have for your talk
+  lengthAlertAt: 55,  // when you need to be alerted to wrap it up
+  lengthWarnAt: 45    // when you want a warning
 };
 /** Loads Trickster.
  * config: configuration, or TricksterDefaultConfig to get the defaults
@@ -128,13 +138,30 @@ var TricksterLoader = function(config,functions) {
     });
   }
 
-  function setupKeyBindings() {
+  function setupKeyBindings(timer) {
     bindKeys(config.advanceKeycodes,Trickster.advance);
     bindKeys(config.backKeycodes,Trickster.back);
     bindKeys(config.startOverKeycodes,Trickster.startOver);
     preventDefaultKeyCodeAction(config.keyCodesPreventingDefault);
     bindKeys([189],Trickster.shrink);   // -
     bindKeys([187],Trickster.embiggen); // +
+    if (timer) {
+      bindKeys(config.startTimerKeycodes,timer.play);
+      bindKeys(config.pauseTimerKeycodes,timer.pause);
+    }
+  }
+
+  function setupSwiping() {
+    $("body").swipe({
+      swipe: function(event,direction,distance,duration,fingerCount) {
+        if (direction == config.advanceSwipe) {
+          Trickster.advance();
+        }
+        else if (direction == config.backSwipe) {
+          Trickster.back();
+        }
+      },
+    });
   }
 
   function hideAllSlides() {
@@ -151,11 +178,12 @@ var TricksterLoader = function(config,functions) {
     previousSlide: 0,
 
     /** Set everything up for the slideshow */
-    load: function() {
+    load: function(timer) {
       // Order matters here
       Trickster.totalSlides = slides().length;
       initCurrentSlide();
-      setupKeyBindings();
+      setupKeyBindings(timer);
+      setupSwiping();
       syntaxHighlighter().highlight();
       sizeAllToFit();
       hideAllSlides();

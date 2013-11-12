@@ -112,3 +112,6 @@ li {
 blockquote {
   font-family: "Quicksand";
   line-height: 1em; }
+
+#timer {
+  display: none; }
